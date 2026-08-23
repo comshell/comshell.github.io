@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comshell | Cybersecurity for Young Creators</title>
+    <title>ComShell | Safe Creator Launchpad for Young Creators</title>
     <style>
+        :root {
+            --brand-teal: #2aa6ad;
+            --brand-red: #d9383a;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,8 +22,8 @@
         }
         body {
             font-family: system-ui, -apple-system, sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             line-height: 1.6;
         }
 
@@ -23,25 +33,29 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            background-color: #1e293b;
-            border-bottom: 1px solid #334155;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 100;
         }
         .logo {
-            height: 50px;
+            height: 40px;
             width: auto;
             display: block;
         }
         .nav-btn {
-            background-color: #0284c7;
+            background-color: var(--brand-teal);
             color: #ffffff;
             padding: 0.6rem 1.2rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
+            transition: opacity 0.2s ease;
+        }
+        .nav-btn:hover {
+            opacity: 0.9;
         }
 
         /* Main Container */
@@ -54,33 +68,40 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 3rem 0;
+            padding: 2rem 0 3rem 0;
         }
         h1 {
-            color: #38bdf8;
+            color: var(--text-light);
             font-size: clamp(2rem, 5vw, 3.2rem);
             margin-bottom: 1rem;
             line-height: 1.2;
         }
+        h1 .highlight-teal {
+            color: var(--brand-teal);
+        }
+        h1 .highlight-red {
+            color: var(--brand-red);
+        }
         .hero p {
-            color: #94a3b8;
-            font-size: 1.2rem;
-            max-width: 650px;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            max-width: 700px;
             margin: 0 auto 2rem auto;
         }
 
         /* Package Card Section */
         .package-card {
-            background: #1e293b;
-            border: 2px solid #0284c7;
+            background: var(--card-bg);
+            border: 2px solid var(--brand-teal);
             border-radius: 16px;
             padding: 2.5rem;
-            box-shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.2);
+            box-shadow: 0 10px 30px -5px rgba(42, 166, 173, 0.15);
             margin: 2rem 0;
         }
         .badge {
-            background: #0369a1;
-            color: #e0f2fe;
+            background: rgba(42, 166, 173, 0.15);
+            color: var(--brand-teal);
+            border: 1px solid var(--brand-teal);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -91,58 +112,82 @@
             margin-bottom: 1rem;
         }
         .package-card h2 {
-            font-size: 2rem;
-            color: #f8fafc;
-            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .package-card .tagline {
+            color: var(--brand-red);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
         }
         .package-card p {
-            color: #94a3b8;
+            color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
         .features-list {
             list-style: none;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         .features-list li {
-            padding: 0.6rem 0;
-            border-bottom: 1px solid #334155;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
             color: #cbd5e1;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
         .features-list li::before {
             content: "✓";
-            color: #38bdf8;
+            color: var(--brand-teal);
             font-weight: bold;
             margin-right: 0.75rem;
             font-size: 1.2rem;
+            line-height: 1;
         }
 
         /* Call to Action Button */
         .btn-primary {
-            display: inline-block;
-            background-color: #0284c7;
+            display: block;
+            background-color: var(--brand-red);
             color: #ffffff;
-            padding: 0.9rem 2rem;
+            padding: 1rem 2rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1rem;
             text-align: center;
-            width: 100%;
-            transition: background 0.2s ease;
+            transition: opacity 0.2s ease;
         }
         .btn-primary:hover {
-            background-color: #0369a1;
+            opacity: 0.9;
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            margin-top: 3rem;
+            border: 1px solid var(--border-color);
+        }
+        .about-section h3 {
+            color: var(--brand-teal);
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+        .about-section p {
+            color: var(--text-muted);
+            font-size: 1rem;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            color: #64748b;
+            color: var(--text-muted);
             font-size: 0.9rem;
-            border-top: 1px solid #1e293b;
+            border-top: 1px solid var(--border-color);
             margin-top: 3rem;
         }
     </style>
@@ -152,41 +197,48 @@
     <!-- Top Header Bar -->
     <header>
         <a href="#">
-            <img src="ComShell-vertical-trans-LOGO.png" alt="Comshell Logo" class="logo">
+            <img src="ComShell-horizontal-trans.png" alt="ComShell Logo" class="logo">
         </a>
-        <a href="mailto:info@comshell.co.uk" class="nav-btn">Contact Us</a>
+        <a href="mailto:comshell.uk@gmail.com?subject=Inquiry" class="nav-btn">Contact Us</a>
     </header>
 
     <div class="container">
         
         <!-- Hero Section -->
         <section class="hero">
-            <h1>Safely Launching the Next Generation of YouTube Creators</h1>
-            <p>Empowering young content creators and their families with tailored cybersecurity solutions to stream, upload, and grow safely.</p>
+            <h1>Empowering Young Creators.<br><span class="highlight-teal">Protecting</span> What <span class="highlight-red">Matters.</span></h1>
+            <p>Turnkey digital setups and tailored cybersecurity for safe, creative video production and online streaming.</p>
         </section>
 
-        <!-- Feature Flagship Package -->
+        <!-- Featured Flagship Package -->
         <section class="package-card">
-            <span class="badge">Our Core Package</span>
-            <h2>Safe Creator Launchpad</h2>
-            <p>Everything your child needs to launch a safe, secure YouTube presence without exposing personal privacy or security risks.</p>
+            <span class="badge">Turnkey Security Package</span>
+            <h2>The Safe Creator Launchpad</h2>
+            <div class="tagline">Creative freedom for young creators. Total peace of mind for parents.</div>
+            <p>We build a secure, hardened digital "shell" so your child can record, edit, and upload videos without exposing sensitive family data or online safety risks.</p>
             
             <ul class="features-list">
-                <li>Account Security & Multi-Factor Authentication Setup</li>
-                <li>Privacy Hardening (Hiding location, personal details & metadata)</li>
-                <li>Digital Footprint & Exposure Risk Assessment</li>
-                <li>Parental Control & Monitoring Setup</li>
-                <li>Safety Guidelines for Young Creators</li>
+                <li><strong>Network & Device Filtering:</strong> Custom NextDNS setup to block malicious content, tracking, and adult material at the router & device level.</li>
+                <li><strong>Privacy Hardening:</strong> Secure channel setup, location masking, and automated metadata removal from uploaded videos.</li>
+                <li><strong>Account Security:</strong> Multi-factor authentication (MFA) and isolated creator accounts to protect family credentials.</li>
+                <li><strong>Parent Control Dashboard:</strong> Simple central management tools so you maintain oversight without stopping their creativity.</li>
+                <li><strong>Creator Onboarding & Guidelines:</strong> A step-by-step safety walkthrough tailored for young creators and parents.</li>
             </ul>
 
-            <a href="mailto:info@comshell.co.uk?subject=Inquiry%20about%20Safe%20Creator%20Launchpad" class="btn-primary">Book the Launchpad Package</a>
+            <a href="mailto:comshell.uk@gmail.com?subject=Inquiry%20about%20Safe%20Creator%20Launchpad" class="btn-primary">Book The Launchpad Package</a>
+        </section>
+
+        <!-- About / Credibility Section -->
+        <section class="about-section">
+            <h3>Why ComShell?</h3>
+            <p>Founded by a tech creator and cybersecurity professional, ComShell bridges the gap between digital creativity and online safety. We give young creators professional tools while installing enterprise-grade protections behind the scenes.</p>
         </section>
 
     </div>
 
     <!-- Simple Footer -->
     <footer>
-        <p>&copy; Comshell Cybersecurity. All rights reserved.</p>
+        <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
 
 </body>
