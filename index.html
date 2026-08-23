@@ -5,19 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comshell | Cybersecurity for Young Creators</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: system-ui, -apple-system, sans-serif;
-            text-align: center;
-            padding: 50px 20px;
             background-color: #0f172a;
             color: #f8fafc;
         }
-        h1 { color: #38bdf8; font-size: 2.5rem; }
-        p { font-size: 1.2rem; max-width: 600px; margin: 0 auto; color: #94a3b8; }
+
+        /* Top Navigation / Header Bar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+        }
+        .logo {
+            height: 45px; /* Adjust height based on your image dimensions */
+            width: auto;
+            display: block;
+        }
+
+        /* Hero / Main Content Area */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            padding: 2rem 1rem;
+        }
+        .hero-card {
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            background: #1e293b;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
+        }
+        h1 {
+            color: #38bdf8;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #0284c7;
+            color: #ffffff;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
-    <h1>Comshell</h1>
-    <p>Safely launching the next generation of YouTube creators. Website under construction.</p>
+
+    <!-- Header Section -->
+    <header>
+        <a href="#">
+            <img src="ComShell-vertical-trans-LOGO.png" alt="Comshell Logo" class="logo">
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="hero-card">
+            <h1>Comshell</h1>
+            <p>Safely launching the next generation of YouTube creators. Dedicated cybersecurity solutions for young content creators and their families.</p>
+            <a href="mailto:info@comshell.co.uk" class="btn">Get in Touch</a>
+        </div>
+    </main>
+
 </body>
 </html>
