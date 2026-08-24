@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,13 +63,13 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 1.5rem 1.5rem 3rem 1.5rem; /* Reduced top padding to move card up */
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 2rem 0 3rem 0;
+            padding: 1rem 0 1.5rem 0; /* Tightened padding */
         }
         h1 {
             color: var(--text-light);
@@ -86,7 +87,7 @@
             color: var(--text-muted);
             font-size: 1.25rem;
             max-width: 700px;
-            margin: 0 auto 2rem auto;
+            margin: 0 auto;
         }
 
         /* Package Card Section */
@@ -96,31 +97,12 @@
             border-radius: 16px;
             padding: 2.5rem;
             box-shadow: 0 10px 30px -5px rgba(42, 166, 173, 0.15);
-            margin: 2rem 0;
-        }
-        .badge {
-            background: rgba(42, 166, 173, 0.15);
-            color: var(--brand-teal);
-            border: 1px solid var(--brand-teal);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: inline-block;
-            margin-bottom: 1rem;
+            margin: 1.5rem 0 2rem 0; /* Reduced top margin to sit closer to hero */
         }
         .package-card h2 {
             font-size: 2.2rem;
             color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-        .package-card .tagline {
-            color: var(--brand-red);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         .package-card p {
             color: var(--text-muted);
@@ -195,9 +177,9 @@
 <body>
 
     <!-- Top Header Bar -->
-<header>
+    <header>
         <a href="#">
-            <img src="ComShell-vertical-trans-LOGO.png" alt="ComShell Logo" class="logo">
+            <img src="ComShell-horizontal-trans.png" alt="ComShell Logo" class="logo">
         </a>
         <a href="mailto:comshell.uk@gmail.com?subject=Inquiry" class="nav-btn">Contact Us</a>
     </header>
@@ -212,17 +194,15 @@
 
         <!-- Featured Flagship Package -->
         <section class="package-card">
-            <span class="badge">Turnkey Security Package</span>
             <h2>The Safe Creator Launchpad</h2>
-            <div class="tagline">Creative freedom for young creators. Total peace of mind for parents.</div>
             <p>We build a secure, hardened digital "shell" so your child can record, edit, and upload videos without exposing sensitive family data or online safety risks.</p>
             
             <ul class="features-list">
+                <li><strong>Custom Channel Branding & Art:</strong> Professional logo design, custom YouTube banner, and animated video intro to make their channel look legit from day one.</li>
                 <li><strong>Network & Device Filtering:</strong> Custom NextDNS setup to block malicious content, tracking, and adult material at the router & device level.</li>
                 <li><strong>Privacy Hardening:</strong> Secure channel setup, location masking, and automated metadata removal from uploaded videos.</li>
                 <li><strong>Account Security:</strong> Multi-factor authentication (MFA) and isolated creator accounts to protect family credentials.</li>
-                <li><strong>Parent Control Dashboard:</strong> Simple central management tools so you maintain oversight without stopping their creativity.</li>
-                <li><strong>Creator Onboarding & Guidelines:</strong> A step-by-step safety walkthrough tailored for young creators and parents.</li>
+                <li><strong>Parent Control Dashboard & Guidelines:</strong> Simple central management tools and a step-by-step safety walkthrough for parents.</li>
             </ul>
 
             <a href="mailto:comshell.uk@gmail.com?subject=Inquiry%20about%20Safe%20Creator%20Launchpad" class="btn-primary">Book The Launchpad Package</a>
