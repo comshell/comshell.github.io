@@ -106,31 +106,49 @@
         }
         .package-card p {
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin: 0 auto 1.5rem auto;
+            max-width: 750px;
         }
+
+        /* Features List Stacking Fix */
         .features-list {
             list-style: none;
-            margin-bottom: 2.5rem;
+            margin: 0 auto 2.5rem auto;
+            max-width: 750px;
+            text-align: left;
         }
         .features-list li {
-            padding: 0.75rem 0;
+            padding: 1rem 0;
             border-bottom: 1px solid var(--border-color);
             color: #cbd5e1;
             display: flex;
             align-items: flex-start;
+            gap: 0.75rem;
         }
         .features-list li::before {
             content: "✓";
             color: var(--brand-teal);
             font-weight: bold;
-            margin-right: 0.75rem;
             font-size: 1.2rem;
-            line-height: 1;
+            line-height: 1.4;
+            flex-shrink: 0;
+        }
+        .features-list strong {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+            font-size: 1.05rem;
+        }
+        .features-list p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         /* Call to Action Button */
         .btn-primary {
-            display: block;
+            display: inline-block;
             background-color: var(--brand-red);
             color: #ffffff;
             padding: 1rem 2rem;
@@ -152,6 +170,7 @@
             padding: 2rem 2.5rem;
             margin-top: 3rem;
             border: 1px solid var(--border-color);
+            text-align: center;
         }
         .about-section h3 {
             color: var(--brand-teal);
@@ -161,6 +180,8 @@
         .about-section p {
             color: var(--text-muted);
             font-size: 1rem;
+            max-width: 750px;
+            margin: 0 auto;
         }
 
         /* Footer */
@@ -200,8 +221,9 @@
             .package-card h2 {
                 font-size: 1.6rem;
             }
-            .features-list li {
-                font-size: 0.95rem;
+            .btn-primary {
+                display: block;
+                width: 100%;
             }
             .about-section {
                 padding: 1.25rem;
@@ -233,11 +255,36 @@
             <p>Launching a YouTube channel should be exciting, not stressful. We give young creators the tools, graphics, and confidence to stand out from day one, while setting up hard-hitting privacy shields to defend against cyberbullying, personal data exposure, and inappropriate content.</p>
             
             <ul class="features-list">
-                <li><strong>Custom Channel Branding & Art:</strong> Professional logo design, custom YouTube banner, and animated video intro to make their channel look legit from day one.</li>
-                <li><strong>Network & Device Filtering:</strong> Custom NextDNS setup to block malicious content, tracking, and adult material at the router & device level.</li>
-                <li><strong>Privacy Hardening:</strong> Secure channel setup, location masking, and automated metadata removal from uploaded videos.</li>
-                <li><strong>Account Security:</strong> Multi-factor authentication (MFA) and isolated creator accounts to protect family credentials.</li>
-                <li><strong>Parent Control Dashboard & Guidelines:</strong> Simple central management tools and a step-by-step safety walkthrough for parents.</li>
+                <li>
+                    <div>
+                        <strong>Custom Channel Branding & Art</strong>
+                        <p>Professional logo design, custom YouTube banner, and animated video intro to make their channel look legit from day one.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Network & Device Filtering</strong>
+                        <p>Custom NextDNS setup to block malicious content, tracking, and adult material at the router & device level.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Privacy Hardening</strong>
+                        <p>Secure channel setup, location masking, and automated metadata removal from uploaded videos.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Account Security</strong>
+                        <p>Multi-factor authentication (MFA) and isolated creator accounts to protect family credentials.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Parent Control Dashboard & Guidelines</strong>
+                        <p>Simple central management tools and a step-by-step safety walkthrough for parents.</p>
+                    </div>
+                </li>
             </ul>
 
             <a href="mailto:comshell.uk@gmail.com?subject=Inquiry%20about%20Safe%20Creator%20Launchpad" class="btn-primary">Book The Launchpad Package</a>
