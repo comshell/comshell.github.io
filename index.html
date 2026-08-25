@@ -110,7 +110,7 @@
             max-width: 750px;
         }
 
-        /* Features List Stacking Fix */
+        /* Features List Stacking */
         .features-list {
             list-style: none;
             margin: 0 auto 2.5rem auto;
@@ -146,21 +146,95 @@
             line-height: 1.5;
         }
 
-        /* Form Container Styles */
-        .launchpad-form {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+        /* Call to Action Button */
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--brand-red);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* Modal Content Box */
+        .modal-card {
+            background: var(--card-bg);
+            border: 2px solid var(--brand-teal);
+            border-radius: 16px;
             padding: 2rem;
-            margin: 2rem auto 0 auto;
-            max-width: 750px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.25s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.25rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+        .close-btn:hover {
+            color: var(--text-light);
+        }
+
+        /* Modal Form Styles */
+        .launchpad-form {
             text-align: left;
         }
         .launchpad-form h3 {
             color: var(--text-light);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1.25rem;
             text-align: center;
+            padding-right: 1.5rem;
         }
         .form-group {
             margin-bottom: 1.25rem;
@@ -177,7 +251,7 @@
         .form-group textarea {
             width: 100%;
             padding: 0.75rem 1rem;
-            background: var(--card-bg);
+            background: var(--bg-dark);
             border: 1px solid var(--border-color);
             border-radius: 6px;
             color: var(--text-light);
@@ -201,26 +275,6 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-        }
-
-        /* Call to Action Button */
-        .btn-primary {
-            display: inline-block;
-            background-color: var(--brand-red);
-            color: #ffffff;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-            width: 100%;
-        }
-        .btn-primary:hover {
-            opacity: 0.9;
         }
 
         /* About Section */
@@ -281,8 +335,8 @@
             .package-card h2 {
                 font-size: 1.6rem;
             }
-            .launchpad-form {
-                padding: 1.25rem;
+            .modal-card {
+                padding: 1.5rem;
             }
             .radio-group {
                 flex-direction: column;
@@ -374,7 +428,23 @@
                 </li>
             </ul>
 
-            <!-- Booking Form -->
+            <!-- Button that opens the modal -->
+            <button id="openModalBtn" class="btn-primary">Book The Launchpad Package</button>
+        </section>
+
+        <!-- About / Credibility Section -->
+        <section class="about-section">
+            <h3>Why ComShell?</h3>
+            <p>Creative self-expression is vital for young people, but fear of online safety risks shouldn’t hold them back. Founded by a cybersecurity specialist with a background in journalism, podcasting and brand design - ComShell bridges the gap between digital defence and media production.</p>
+        </section>
+
+    </div>
+
+    <!-- Booking Form Modal Overlay -->
+    <div id="bookingModal" class="modal-overlay">
+        <div class="modal-card">
+            <button id="closeModalBtn" class="close-btn" aria-label="Close Modal">&times;</button>
+            
             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="launchpad-form">
                 <h3>Book The Launchpad Package</h3>
 
@@ -410,26 +480,54 @@
                 <!-- Additional Message -->
                 <div class="form-group">
                     <label for="message">Message / Channel Ideas</label>
-                    <textarea id="message" name="Message" rows="4" placeholder="Tell us a little about what content they want to create..."></textarea>
+                    <textarea id="message" name="Message" rows="3" placeholder="Tell us a little about what content they want to create..."></textarea>
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn-primary">Send Booking Request</button>
+                <button type="submit" class="btn-primary" style="width: 100%;">Send Booking Request</button>
             </form>
-        </section>
-
-        <!-- About / Credibility Section -->
-        <section class="about-section">
-            <h3>Why ComShell?</h3>
-            <p>Creative self-expression is vital for young people, but fear of online safety risks shouldn’t hold them back. Founded by a cybersecurity specialist with a background in journalism, podcasting and brand design - ComShell bridges the gap between digital defence and media production.</p>
-        </section>
-
+        </div>
     </div>
 
-    <!-- Simple Footer -->
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript to Handle Modal Functionality -->
+    <script>
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const bookingModal = document.getElementById('bookingModal');
+
+        // Open modal
+        openModalBtn.addEventListener('click', () => {
+            bookingModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        });
+
+        // Close modal function
+        const closeModal = () => {
+            bookingModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore background scrolling
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Close on clicking outside the modal box
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                closeModal();
+            }
+        });
+
+        // Close on Esc key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && bookingModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
 
 </body>
 </html>
