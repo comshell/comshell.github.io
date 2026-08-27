@@ -440,59 +440,60 @@
 
     </div>
 
-    <!-- Booking Form Modal Overlay -->
-    <div id="bookingModal" class="modal-overlay">
-        <div class="modal-card">
+  <!-- Booking Form Modal Overlay -->
+<div id="bookingModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3>Ask About Launchpad Package</h3>
             <button id="closeModalBtn" class="close-btn" aria-label="Close Modal">&times;</button>
-            
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="launchpad-form">
-                <h3>Ask About Launchpad Package</h3>
-
-                <!-- Parent's Name -->
-                <div class="form-group">
-                    <label for="parent-name">Your Name</label>
-                    <input type="text" id="parent-name" name="Parent Name" required placeholder="Type your name here..">
-                </div>
-
-                 <!-- Email Address -->
-                <div class="form-group">
-                    <label for="email-address">Email</label>
-                    <input type="text" id="parent-name" name="Parent Name" required placeholder="Type your email address here..">
-                </div>
-
-                <!-- Child's Age -->
-                <div class="form-group">
-                    <label for="child-age">Child's Age</label>
-                    <select id="child-age" name="Child Age" required>
-                        <option value="" disabled selected>Select age</option>
-                        <option value="Under 8">Under 8</option>
-                        <option value="8-10">8 – 10</option>
-                        <option value="11-13">11 – 13</option>
-                        <option value="17+">14+</option>
-                    </select>
-                </div>
-
-                <!-- Streaming Question -->
-                <div class="form-group">
-                    <label>Does your child plan to stream video games content?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="Streams Video Games" value="Yes" required> Yes</label>
-                        <label><input type="radio" name="Streams Video Games" value="No"> No</label>
-                        <label><input type="radio" name="Streams Video Games" value="Unsure"> Unsure</label>
-                    </div>
-                </div>
-
-                <!-- Additional Message -->
-                <div class="form-group">
-                    <label for="message">Message / Channel Ideas</label>
-                    <textarea id="message" name="Message" rows="3" placeholder="Write your message here or tell us a little about the content they want to create..."></textarea>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="btn-primary" style="width: 100%;">Send</button>
-            </form>
         </div>
+        
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="launchpad-form">
+            <!-- Parent's Name -->
+            <div class="form-group">
+                <label for="parent-name">Your Name</label>
+                <input type="text" id="parent-name" name="Parent Name" required placeholder="Type your name here..">
+            </div>
+
+            <!-- Email Address -->
+            <div class="form-group">
+                <label for="email-address">Email</label>
+                <input type="email" id="email-address" name="Email Address" required placeholder="Type your email address here..">
+            </div>
+
+            <!-- Child's Age -->
+            <div class="form-group">
+                <label for="child-age">Child's Age</label>
+                <select id="child-age" name="Child Age" required>
+                    <option value="" disabled selected>Select age</option>
+                    <option value="Under 8">Under 8</option>
+                    <option value="8-10">8 – 10</option>
+                    <option value="11-13">11 – 13</option>
+                    <option value="14+">14+</option>
+                </select>
+            </div>
+
+            <!-- Streaming Question -->
+            <div class="form-group">
+                <label>Does your child plan to stream video games content?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="Streams Video Games" value="Yes" required> Yes</label>
+                    <label><input type="radio" name="Streams Video Games" value="No"> No</label>
+                    <label><input type="radio" name="Streams Video Games" value="Unsure"> Unsure</label>
+                </div>
+            </div>
+
+            <!-- Additional Message -->
+            <div class="form-group">
+                <label for="message">Message / Channel Ideas</label>
+                <textarea id="message" name="Message" rows="3" placeholder="Write your message here or tell us a little about the content they want to create..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-primary" style="width: 100%;">Send</button>
+        </form>
     </div>
+</div>
 
     <!-- Footer -->
     <footer>
