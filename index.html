@@ -1,3 +1,13 @@
+Here is your complete updated <head> section with the new styles merged directly into your CSS.
+
+What was updated inside:
+.modal-card now includes max-height: 85vh; and overflow-y: auto; so it caps the height and scrolls internally if needed.
+
+.close-btn now includes position: sticky;, top: 0;, and float: right; so the × stays locked to the top right of the modal box even when scrolling through the form.
+
+You can replace your entire <head> block with this:
+
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -193,6 +203,8 @@
             padding: 2rem;
             max-width: 600px;
             width: 100%;
+            max-height: 85vh; /* Prevents overflow off top/bottom of screen */
+            overflow-y: auto;  /* Allows scrolling inside the modal box */
             position: relative;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             animation: modalFadeIn 0.25s ease-out;
@@ -210,9 +222,10 @@
         }
 
         .close-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1.25rem;
+            position: sticky;
+            top: 0;
+            float: right;
+            z-index: 10;
             background: transparent;
             border: none;
             color: var(--text-muted);
