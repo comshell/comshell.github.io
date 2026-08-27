@@ -353,8 +353,7 @@
 </head>
 <body>
 
-    <!-- Top Header Bar -->
-    <header>
+   <header>
         <a href="#">
             <img src="ComShell-horizontal-trans.png" alt="ComShell Logo" class="logo">
         </a>
@@ -363,13 +362,11 @@
 
     <div class="container">
         
-        <!-- Hero Section -->
         <section class="hero">
             <h1>Fuel Their<br><span class="highlight-teal">Creative Spark.</span> Shield Their <span class="highlight-red">Online World</span></h1>
             <p>Full safety audit and artistic branding for young YouTubers. Supporting creative freedom and delivering peace of mind for parents.</p>
         </section>
 
-        <!-- Featured Flagship Package -->
         <section class="package-card">
             <h2>The Safe Creator Launchpad</h2>
             <p><em>Launching a YouTube channel should be exciting, not stressful. We give young creators the tools, graphics and confidence to stand out from day one, while setting up hard-hitting privacy shields to defend against cyberbullying, personal data exposure, and inappropriate content.</em></p>
@@ -431,11 +428,9 @@
                 </li>
             </ul>
 
-            <!-- Button that opens the modal -->
             <button id="openModalBtn" class="btn-primary">Ask About Launchpad Package</button>
         </section>
 
-        <!-- About / Credibility Section -->
         <section class="about-section">
             <h3>Why ComShell?</h3>
             <p>Creative self-expression is vital for young people, but fear of online safety risks shouldn’t hold them back. Founded by a cybersecurity specialist with a background in journalism, podcasting and brand design - ComShell bridges the gap between digital defence and media production.</p>
@@ -443,27 +438,23 @@
 
     </div>
 
-    <!-- Booking Form Modal Overlay -->
     <div id="bookingModal" class="modal-overlay">
         <div class="modal-card">
             <button id="closeModalBtn" class="close-btn" aria-label="Close Modal">&times;</button>
             
-            <form action="https://formspree.io/f/mdeonlbw" method="POST" class="launchpad-form">
+            <form action="https://formspree.io/f/mdeonlbw" method="POST" class="launchpad-form" id="launchpadForm">
                 <h3>Ask About Launchpad Package</h3>
 
-                <!-- Parent's Name -->
                 <div class="form-group">
                     <label for="parent-name">Your Name</label>
                     <input type="text" id="parent-name" name="Parent Name" required placeholder="Type your name here..">
                 </div>
 
-                 <!-- Email Address -->
                 <div class="form-group">
                     <label for="email-address">Email</label>
-                    <input type="text" id="parent-name" name="Parent Name" required placeholder="Type your email address here..">
+                    <input type="email" id="email-address" name="Email Address" required placeholder="Type your email address here..">
                 </div>
 
-                <!-- Child's Age -->
                 <div class="form-group">
                     <label for="child-age">Child's Age</label>
                     <select id="child-age" name="Child Age" required>
@@ -471,11 +462,10 @@
                         <option value="Under 8">Under 8</option>
                         <option value="8-10">8 – 10</option>
                         <option value="11-13">11 – 13</option>
-                        <option value="17+">14+</option>
+                        <option value="14+">14+</option>
                     </select>
                 </div>
 
-                <!-- Streaming Question -->
                 <div class="form-group">
                     <label>Does your child plan to stream video games content?</label>
                     <div class="radio-group">
@@ -485,54 +475,93 @@
                     </div>
                 </div>
 
-                <!-- Additional Message -->
                 <div class="form-group">
                     <label for="message">Message / Channel Ideas</label>
                     <textarea id="message" name="Message" rows="3" placeholder="Write your message here or tell us a little about the content they want to create..."></textarea>
                 </div>
 
-                <!-- Submit Button -->
                 <button type="submit" class="btn-primary" style="width: 100%;">Send</button>
             </form>
+
+            <div id="successMessage" style="display: none; text-align: center; padding: 2rem 1rem;">
+                <h3 style="color: var(--brand-teal); font-size: 1.8rem; margin-bottom: 0.75rem;">Message Sent!</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem;">Thanks for reaching out. We've received your inquiry and will get back to you shortly.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript to Handle Modal Functionality -->
     <script>
         const openModalBtn = document.getElementById('openModalBtn');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const bookingModal = document.getElementById('bookingModal');
+        const launchpadForm = document.getElementById('launchpadForm');
+        const successMessage = document.getElementById('successMessage');
 
         // Open modal
         openModalBtn.addEventListener('click', () => {
             bookingModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Stop background scrolling
+            document.body.style.overflow = 'hidden';
         });
 
-        // Close modal function
+        // Close modal function (resets views)
         const closeModal = () => {
             bookingModal.classList.remove('active');
-            document.body.style.overflow = ''; // Restore background scrolling
+            document.body.style.overflow = '';
+            
+            // Soft reset back to form view after user closes popup
+            setTimeout(() => {
+                launchpadForm.reset();
+                launchpadForm.style.display = 'block';
+                successMessage.style.display = 'none';
+            }, 300);
         };
 
         closeModalBtn.addEventListener('click', closeModal);
 
-        // Close on clicking outside the modal box
+        // Close on clicking outside modal
         bookingModal.addEventListener('click', (e) => {
-            if (e.target === bookingModal) {
-                closeModal();
-            }
+            if (e.target === bookingModal) closeModal();
         });
 
-        // Close on Esc key press
+        // Close on Esc key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && bookingModal.classList.contains('active')) {
-                closeModal();
+            if (e.key === 'Escape' && bookingModal.classList.contains('active')) closeModal();
+        });
+
+        // Handle Form Submission silently without Formspree redirect
+        launchpadForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = launchpadForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            const formData = new FormData(launchpadForm);
+
+            try {
+                const response = await fetch(launchpadForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    launchpadForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    alert('Oops! There was a problem submitting your form. Please try again.');
+                }
+            } catch (error) {
+                alert('Network error. Please check your connection and try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send';
             }
         });
     </script>
