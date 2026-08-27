@@ -250,6 +250,7 @@
             font-size: 0.95rem;
         }
         .form-group input[type="text"],
+        .form-group input[type="email"],
         .form-group select,
         .form-group textarea {
             width: 100%;
@@ -262,6 +263,7 @@
             font-family: inherit;
         }
         .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
@@ -477,7 +479,7 @@
 
                 <div class="form-group">
                     <label for="message">Message / Channel Ideas</label>
-                    <textarea id="message" name="Message" rows="3" placeholder="Write your message here or tell us a little about the content they want to create..."></textarea>
+                    <textarea id="message" name="Message" rows="3" placeholder="Write your message here or tell us a little about the content they want to create.."></textarea>
                 </div>
 
                 <button type="submit" class="btn-primary" style="width: 100%;">Send</button>
@@ -485,7 +487,7 @@
 
             <div id="successMessage" style="display: none; text-align: center; padding: 2rem 1rem;">
                 <h3 style="color: var(--brand-teal); font-size: 1.8rem; margin-bottom: 0.75rem;">Message Sent!</h3>
-                <p style="color: var(--text-muted); font-size: 1.05rem;">Thanks for reaching out. We've received your inquiry and will get back to you shortly.</p>
+                <p style="color: var(--text-muted); font-size: 1.05rem;">Thanks for reaching out! We will get back to you shortly.</p>
             </div>
         </div>
     </div>
