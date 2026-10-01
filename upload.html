@@ -1,1 +1,598 @@
-x
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComShell | Safe Creator Launchpad for Young Creators</title>
+    <!-- Google Font: Oswald -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+        :root {
+            --brand-teal: #2aa6ad;
+            --brand-red: #d9383a;
+            --bg-dark: #edf6f7;        /* Soft pastel slate background */
+            --card-bg: #ffffff;        /* Crisp white for central cards */
+            --navy-dark: #0f172a;      /* Rich navy for Header & Why ComShell box */
+            --border-color: #e2e8f0;    /* Light borders */
+            --text-light: #0f172a;     /* Dark text for white areas */
+            --text-muted: #475569;     /* Subtext for white areas */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation Header - Rich Dark Navy Frame */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--navy-dark);
+            border-bottom: 1px solid #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+        .nav-btn {
+            background-color: var(--brand-teal);
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s ease;
+        }
+        .nav-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 3rem 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 1rem 0 1.5rem 0;
+        }
+        h1 {
+            color: var(--text-light);
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .highlight-teal {
+            color: var(--brand-teal);
+        }
+        .highlight-red {
+            color: var(--brand-red);
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Package Card Section */
+        .package-card {
+            background: var(--card-bg);
+            border: 2px solid var(--brand-teal);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+            margin: 1.5rem 0 2rem 0;
+            text-align: center;
+        }
+        
+        /* Oswald YouTube-Style Font for Launchpad Heading */
+        .package-card h2 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 2.2rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        .package-card p {
+            color: var(--text-muted);
+            margin: 0 auto 1.5rem auto;
+            max-width: 750px;
+        }
+
+        /* Features List Stacking */
+        .features-list {
+            list-style: none;
+            margin: 0 auto 2.5rem auto;
+            max-width: 750px;
+            text-align: left;
+        }
+        .features-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .features-list li::before {
+            content: "✓";
+            color: var(--brand-teal);
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1.4;
+            flex-shrink: 0;
+        }
+        .features-list strong {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+            font-size: 1.05rem;
+        }
+        .features-list p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Call to Action Button */
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--brand-red);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* Modal Content Box */
+        .modal-card {
+            background: var(--card-bg);
+            border: 2px solid var(--brand-teal);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.25s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-btn {
+            position: sticky;
+            top: 0;
+            float: right;
+            z-index: 10;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+        .close-btn:hover {
+            color: var(--text-light);
+        }
+
+        /* Modal Form Styles */
+        .launchpad-form {
+            text-align: left;
+        }
+        .launchpad-form h3 {
+            color: var(--text-light);
+            font-size: 1.6rem;
+            margin-bottom: 1.25rem;
+            text-align: center;
+            padding-right: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--brand-teal);
+            background: #ffffff;
+        }
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.25rem 0;
+        }
+        .radio-group label {
+            font-weight: normal;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* About Section - Rich Dark Navy Frame with Turquoise Accent */
+        .about-section {
+            background: var(--navy-dark);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            margin-top: 3rem;
+            border: 1px solid #1e293b;
+            border-top: 4px solid var(--brand-teal);
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .about-section h3 {
+            color: var(--brand-teal);
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+        .about-section p {
+            color: #f8fafc; /* Crisp white text inside the navy box */
+            font-size: 1rem;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            header {
+                padding: 0.75rem 1rem;
+            }
+            .logo {
+                height: 32px;
+            }
+            .container {
+                padding: 1rem 1rem 2rem 1rem;
+            }
+            .hero {
+                padding: 0.5rem 0 1rem 0;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .package-card {
+                padding: 1.25rem;
+                margin: 1rem 0;
+            }
+            .package-card h2 {
+                font-size: 1.6rem;
+            }
+            .modal-card {
+                padding: 1.5rem;
+            }
+            .radio-group {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .about-section {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+   <header>
+        <a href="#">
+            <img src="ComShell-horizontal-trans.png" alt="ComShell Logo" class="logo">
+        </a>
+        <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
+    </header>
+
+    <div class="container">
+        
+        <section class="hero">
+            <h1>Fuel Their<br><span class="highlight-teal">Creative Spark.</span> Shield Their <span class="highlight-red">Online World</span></h1>
+            <p>Full safety audit and artistic branding for young YouTubers. Supporting creative freedom and delivering peace of mind for parents.</p>
+        </section>
+
+        <section class="package-card">
+          <h2 style="font-family: 'Oswald', sans-serif; font-weight: 700;">
+    THE <span style="color: var(--brand-red);">SAFE</span> <span style="color: var(--brand-teal);">CREATOR</span> LAUNCHPAD
+</h2>
+            <p><em>Launching a YouTube channel should be exciting, not stressful. We give young creators the tools, graphics and confidence to stand out from day one - while setting up hard-hitting privacy shields to defend against cyberbullying, personal data exposure and inappropriate content.</em></p>
+            
+            <ul class="features-list">
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">Physical Security Key & Account Hardening</strong>
+                        <p>You get a physical hardware key to lock down your child’s account – preventing password theft and any unauthorized logins. Simply tap against your phone to unlock.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">Parental Control & Comment Shields</strong>
+                        <p>YouTube Studio setup directly on your device – featuring inbuilt auto-moderation and giving you the ability to review comments before they ever go live.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">Custom Channel Branding & Studio Art</strong>
+                        <p>A complete visual makeover including a custom logo, channel banner and an animated video intro / outro – so your child’s channel looks legitimate and professional from day one.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">Dedicated Storage Drive for Video Game Streamers</strong>
+                        <p>High-speed USB storage drive pre-configured for budding video game streamers to easily save, organize and transfer their game clips to the editing studio – removing the risks of live streaming.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">The Safe Upload Pipeline</strong>
+                        <p>Third-party video uploading configured directly on your child’s device, bypassing the need for YouTube’s app. All uploads default to "Private" until you review them, giving your child full creative freedom while you retain 100% ownership and administrative control.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">Privacy Shields & Separate Channels</strong>
+                        <p>Device location metadata turned off on creator devices, combined with a dedicated public business email to keep all your family personal details private.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">Device-Level Shielding & Filter App</strong>
+                        <p>We install and configure a dedicated protection app on your child’s device. This directly protects their phone or tablet from dangerous content 24/7, without having to rely on your broadband provider.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">Internet Safety Poster & Anti-Phishing Guide</strong>
+                        <p>An internet safety poster for young creators to stick on their wall, paired with an anti-phishing technical cheat sheet for parents.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">COPPA & Platform Compliance Setup</strong>
+                        <p>We configure the channel’s privacy defaults to align with COPPA and YouTube safety guidelines – protecting your child’s privacy without you having to read through complex terms of service.</p>
+                    </div>
+                </li>
+            </ul>
+
+            <button id="openModalBtn" class="btn-primary">Ask About Launchpad Package</button>
+        </section>
+
+        <section class="about-section">
+            <h3>Why Com<span style="color: var(--brand-red);">Shell</span>?</h3>
+            <p>Creative self-expression is vital for young people, but fear of online safety risks shouldn’t hold them back. Founded by a cybersecurity specialist with a background in journalism, podcasting and brand design - ComShell bridges the gap between digital defence and media production.</p>
+        </section>
+
+    </div>
+
+    <div id="bookingModal" class="modal-overlay">
+        <div class="modal-card">
+            <button id="closeModalBtn" class="close-btn" aria-label="Close Modal">&times;</button>
+            
+            <form action="https://formspree.io/f/mdeonlbw" method="POST" class="launchpad-form" id="launchpadForm">
+                <h3>Ask About Launchpad Package</h3>
+
+                <div class="form-group">
+                    <label for="parent-name">Your Name</label>
+                    <input type="text" id="parent-name" name="Parent Name" required placeholder="Type your name here..">
+                </div>
+
+                <div class="form-group">
+                    <label for="email-address">Email</label>
+                    <input type="email" id="email-address" name="Email Address" required placeholder="Type your email address here..">
+                </div>
+
+                <div class="form-group">
+                    <label for="child-age">Child's Age</label>
+                    <select id="child-age" name="Child Age" required>
+                        <option value="" disabled selected>Select age</option>
+                        <option value="Under 8">Under 8</option>
+                        <option value="8-10">8 – 10</option>
+                        <option value="11-13">11 – 13</option>
+                        <option value="14+">14+</option>
+                    </select>
+                </div>
+
+                 <div class="form-group">
+                    <label for="child-age">What will they record with?</label>
+                    <select id="child-age" name="Child Age" required>
+                        <option value="" disabled selected>Select device</option>
+                        <option value="Android phone or tablet">Android phone or tablet</option>
+                        <option value="iPhone or iPad">iPhone or iPad</option>
+                        <option value="PC">PC</option>
+                        <option value="Mac">Mac</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Does your child plan to stream video games content?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Streams Video Games" value="Yes" required> Yes</label>
+                        <label><input type="radio" name="Streams Video Games" value="No"> No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="Message" rows="3" placeholder="Write your message here.."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%;">Send</button>
+            </form>
+
+            <div id="successMessage" style="display: none; text-align: center; padding: 2rem 1rem;">
+                <h3 style="color: var(--brand-teal); font-size: 1.8rem; margin-bottom: 0.75rem;">Message Sent!</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem;">Thanks for contacting ComShell, we will get back to you shortly.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 ComShell. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const bookingModal = document.getElementById('bookingModal');
+        const launchpadForm = document.getElementById('launchpadForm');
+        const successMessage = document.getElementById('successMessage');
+
+        // Open modal
+        openModalBtn.addEventListener('click', () => {
+            bookingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal function (resets views)
+        const closeModal = () => {
+            bookingModal.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Soft reset back to form view after user closes popup
+            setTimeout(() => {
+                launchpadForm.reset();
+                launchpadForm.style.display = 'block';
+                successMessage.style.display = 'none';
+            }, 300);
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Close on clicking outside modal
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target === bookingModal) closeModal();
+        });
+
+        // Close on Esc key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && bookingModal.classList.contains('active')) closeModal();
+        });
+
+        // Handle Form Submission silently without Formspree redirect
+        launchpadForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = launchpadForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            const formData = new FormData(launchpadForm);
+
+            try {
+                const response = await fetch(launchpadForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    launchpadForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    alert('Oops! There was a problem submitting your form. Please try again.');
+                }
+            } catch (error) {
+                alert('Network error. Please check your connection and try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send';
+            }
+        });
+    </script>
+
+</body>
+</html>
