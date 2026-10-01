@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Launch Pad - Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; text-align: center; }
+        .btn { background-color: #ff0000; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; cursor: pointer; border: none; }
+        .hidden { display: none; }
+        .error { color: red; font-weight: bold; background: #ffe6e6; padding: 10px; border-radius: 5px; margin-top: 15px; }
+        .success { color: green; font-weight: bold; background: #e6ffe6; padding: 10px; border-radius: 5px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <h1>Creator Launch Pad</h1>
+    <p>Secure Video Verification Pipeline</p>
+
+    <div id="auth-section">
+        <p>To begin uploading, you must link your YouTube account first.</p>
+        <a id="login-btn" href="#" class="btn">Link YouTube Account</a>
+    </div>
+
+    <div id="upload-section" class="hidden">
+        <div id="status-message" class="success hidden">YouTube Account Linked Successfully!</div>
+        <h3>Select a Video to Upload</h3>
+        <p style="font-size: 0.9em; color: gray;">Videos are uploaded as <strong>Private</strong> for verification.</p>
+        
+        <input type="file" id="video-file" accept="video/*"><br><br>
+        <button onclick="startUpload()" class="btn">Upload Video</button>
+        <p id="upload-progress"></p>
+    </div>
+
+    <div id="error-box" class="error hidden"></div>
+
+    <script>
+        const BACKEND_URL = "https://youtube-backend-oi2l.onrender.com";
+
+        // Fetch the dynamic Google login URL from your backend
+        fetch(`${BACKEND_URL}/auth/google`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('login-btn').href = data.url;
+            })
+            .catch(err => console.error("Error fetching auth URL:", err));
+
+        // Check URL parameters for success or error flags returned from backend
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('linked') === 'success') {
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('upload-section').classList.remove('hidden');
+            document.getElementById('status-message').classList.remove('hidden');
+            localStorage.setItem('yt_linked', 'true');
+        }
+
+        if (urlParams.get('error')) {
+            showError("Connection expired, please tap 'Link YouTube Account' again.");
+        }
+
+        function showError(msg) {
+            const errBox = document.getElementById('error-box');
+            errBox.innerText = msg;
+            errBox.classList.remove('hidden');
+        }
+
+        async function startUpload() {
+            const fileInput = document.getElementById('video-file');
+            if (fileInput.files.length === 0) {
+                alert("Please select a video file first.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const progress = document.getElementById('upload-progress');
+            progress.innerText = "Requesting upload session from backend...";
+
+            try {
+                // Step 1: Ask backend for the Resumable Session URL
+                const res = await fetch(`${BACKEND_URL}/api/create-upload-session`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        refreshToken: "TEST_TOKEN_PLACEHOLDER", // Will be linked to token storage next
+                        fileSize: file.size,
+                        title: file.name,
+                        description: "Pending verification video submission."
+                    })
+                });
+
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || "Upload initialization failed.");
+
+                const uploadUrl = data.uploadUrl;
+                progress.innerText = "Streaming video directly to YouTube...";
+
+                // Step 2: Stream video file directly from browser to Google's servers
+                const uploadRes = await fetch(uploadUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': file.type,
+                        'X-Upload-Content-Length': file.size
+                    },
+                    body: file
+                });
+
+                if (uploadRes.ok) {
+                    progress.innerText = "Success! Video uploaded and sitting as Private for verification.";
+                } else {
+                    throw new Error("Direct upload stream to Google failed.");
+                }
+
+            } catch (err) {
+                console.error(err);
+                showError(err.message);
+                progress.innerText = "";
+            }
+        }
+    </script>
+</body>
+</html>
