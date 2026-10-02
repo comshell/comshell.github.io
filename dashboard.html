@@ -79,15 +79,18 @@
             try {
                 // Step 1: Ask backend for the Resumable Session URL (using /api/initiate-upload)
                 const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        fileSize: file.size,
-                        fileType: file.type,
-                        title: file.name,
-                        description: "Pending verification video submission."
-                    })
-                });
+    method: 'POST',
+    headers: { 
+        'Content-Type': 'application/json',
+        'Origin-Header': window.location.origin // Pass frontend origin explicitly
+    },
+    body: JSON.stringify({
+        fileSize: file.size,
+        fileType: file.type,
+        title: file.name,
+        description: "Pending verification video submission."
+    })
+});
 
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || "Upload initialization failed.");
