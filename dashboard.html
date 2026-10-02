@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator Launch Pad - Dashboard</title>
+    <title>ComShell - Safe Upload Pipeline</title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; text-align: center; }
         .btn { background-color: #ff0000; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; cursor: pointer; border: none; }
@@ -14,11 +14,11 @@
 </head>
 <body>
 
-    <h1>Creator Launch Pad</h1>
-    <p>Secure Video Verification Pipeline</p>
+    <h1>The Safe Upload Pipeline</h1>
+    <p>Secure Third-party YouTube Uploading</p>
 
     <div id="auth-section">
-        <p>To begin uploading, you must link your YouTube account first.</p>
+        <p>Link your YouTube account before uploading</p>
         <a id="login-btn" href="#" class="btn">Link YouTube Account</a>
     </div>
 
@@ -35,7 +35,7 @@
             <textarea id="video-desc" placeholder="Write a description" rows="3" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;"></textarea>
         </div>
 
-        <p style="font-size: 0.9em; color: gray;">Videos are uploaded as <strong>Private</strong> for verification.</p>
+        <p style="font-size: 0.9em; color: gray;">Uploaded videos remain <strong>Private</strong> until changed by the account holder!</p>
         
         <input type="file" id="video-file" accept="video/*"><br><br>
         <button onclick="startUpload()" class="btn">Upload Video</button>
