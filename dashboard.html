@@ -37,13 +37,8 @@
     <script>
         const BACKEND_URL = "https://youtube-backend-oi2l.onrender.com";
 
-        // Fetch the dynamic Google login URL from your backend
-        fetch(`${BACKEND_URL}/auth/google`)
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('login-btn').href = data.url;
-            })
-            .catch(err => console.error("Error fetching auth URL:", err));
+        // Directly point the login button to your backend route (no fetch needed)
+        document.getElementById('login-btn').href = `${BACKEND_URL}/auth/google`;
 
         // Check URL parameters for success or error flags returned from backend
         const urlParams = new URLSearchParams(window.location.search);
@@ -56,6 +51,12 @@
 
         if (urlParams.get('error')) {
             showError("Connection expired, please tap 'Link YouTube Account' again.");
+        }
+
+        // If they already linked previously in this browser session, show the upload panel
+        if (localStorage.getItem('yt_linked') === 'true') {
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('upload-section').classList.remove('hidden');
         }
 
         function showError(msg) {
@@ -76,12 +77,11 @@
             progress.innerText = "Requesting upload session from backend...";
 
             try {
-                // Step 1: Ask backend for the Resumable Session URL
-                const res = await fetch(`${BACKEND_URL}/api/create-upload-session`, {
+                // Step 1: Ask backend for the Resumable Session URL (using /api/initiate-upload)
+                const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        refreshToken: "TEST_TOKEN_PLACEHOLDER", // Will be linked to token storage next
                         fileSize: file.size,
                         title: file.name,
                         description: "Pending verification video submission."
