@@ -83,6 +83,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         fileSize: file.size,
+                        fileType: file.type,
                         title: file.name,
                         description: "Pending verification video submission."
                     })
