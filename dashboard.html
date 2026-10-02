@@ -83,6 +83,11 @@
             }
 
             const file = fileInput.files[0];
+            
+            // Grab user input (with fallback defaults if left blank)
+    const userTitle = document.getElementById('video-title').value;
+    const userDesc = document.getElementById('video-desc').value;
+            
             const progress = document.getElementById('upload-progress');
             progress.innerText = "Requesting upload session from backend...";
 
