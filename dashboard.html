@@ -25,6 +25,16 @@
     <div id="upload-section" class="hidden">
         <div id="status-message" class="success hidden">YouTube Account Linked Successfully!</div>
         <h3>Select a Video to Upload</h3>
+        
+        <!-- Title and Description Inputs -->
+        <div style="margin: 15px 0; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto;">
+            <label for="video-title"><strong>Title:</strong></label><br>
+            <input type="text" id="video-title" placeholder="Give your video a title" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;"><br><br>
+            
+            <label for="video-desc"><strong>Description:</strong></label><br>
+            <textarea id="video-desc" placeholder="Write a description" rows="3" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;"></textarea>
+        </div>
+
         <p style="font-size: 0.9em; color: gray;">Videos are uploaded as <strong>Private</strong> for verification.</p>
         
         <input type="file" id="video-file" accept="video/*"><br><br>
