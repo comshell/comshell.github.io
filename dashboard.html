@@ -47,7 +47,7 @@
     <script>
         const BACKEND_URL = "https://youtube-backend-oi2l.onrender.com";
 
-        // Directly point the login button to your backend route (no fetch needed)
+        // Directly point the login button to your backend route
         document.getElementById('login-btn').href = `${BACKEND_URL}/auth/google`;
 
         // Check URL parameters for success or error flags returned from backend
@@ -84,28 +84,28 @@
 
             const file = fileInput.files[0];
             
-            // Grab user input (with fallback defaults if left blank)
-    const userTitle = document.getElementById('video-title').value;
-    const userDesc = document.getElementById('video-desc').value;
+            // Grab user inputs
+            const userTitle = document.getElementById('video-title').value;
+            const userDesc = document.getElementById('video-desc').value;
             
             const progress = document.getElementById('upload-progress');
             progress.innerText = "Requesting upload session from backend...";
 
             try {
-                // Step 1: Ask backend for the Resumable Session URL (using /api/initiate-upload)
+                // Step 1: Ask backend for the Resumable Session URL, passing custom title/description
                 const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
-    method: 'POST',
-    headers: { 
-        'Content-Type': 'application/json',
-        'Origin-Header': window.location.origin // Pass frontend origin explicitly
-    },
-    body: JSON.stringify({
-        fileSize: file.size,
-        fileType: file.type,
-        title: file.name,
-        description: "Pending verification video submission."
-    })
-});
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Origin-Header': window.location.origin
+                    },
+                    body: JSON.stringify({
+                        fileSize: file.size,
+                        fileType: file.type,
+                        title: userTitle || file.name, // Falls back to file name if left blank
+                        description: userDesc || "Pending verification video submission." // Falls back if left blank
+                    })
+                });
 
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || "Upload initialization failed.");
