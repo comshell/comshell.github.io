@@ -120,7 +120,7 @@
             max-width: 750px;
         }
 
-        /* Form Group Styles matching modal inputs */
+        /* Form Group Styles */
         .form-group {
             margin-bottom: 1.25rem;
             text-align: left;
@@ -163,7 +163,7 @@
             color: var(--text-muted);
         }
 
-        /* Call to Action Button matching site */
+        /* Call to Action Button */
         .btn-primary {
             display: inline-block;
             background-color: var(--brand-red);
@@ -208,7 +208,7 @@
 </head>
 <body>
 
-     <header>
+    <header>
         <a href="index.html">
             <img src="ComShell-horizontal-trans.png" alt="ComShell Logo" class="logo">
         </a>
@@ -219,6 +219,7 @@
             <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
         </div>
     </header>
+    
     <div class="container">
         
         <section class="hero">
@@ -271,26 +272,35 @@
     <script>
         const BACKEND_URL = "https://youtube-backend-oi2l.onrender.com";
 
-        // Directly point the login button to your backend route
+        // Point the login button directly to your backend OAuth route
         document.getElementById('login-btn').href = `${BACKEND_URL}/auth/google`;
 
-        // Check URL parameters for success or error flags returned from backend
         const urlParams = new URLSearchParams(window.location.search);
+
+        // Check if backend returned success along with the user's email
         if (urlParams.get('linked') === 'success') {
-            document.getElementById('auth-section').classList.add('hidden');
-            document.getElementById('upload-section').classList.remove('hidden');
-            document.getElementById('status-message').classList.remove('hidden');
-            localStorage.setItem('yt_linked', 'true');
+            const loggedInEmail = urlParams.get('email');
+            if (loggedInEmail) {
+                localStorage.setItem('yt_user_email', loggedInEmail.toLowerCase());
+            }
+            // Clean up the URL bar to remove parameters
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
 
         if (urlParams.get('error')) {
-            showError("Connection expired, please tap 'Link YouTube Account' again.");
+            localStorage.removeItem('yt_user_email');
+            showError("Connection expired or unauthorized. Please tap 'Link YouTube Account' again.");
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
 
-        // If they already linked previously in this browser session, show the upload panel
-        if (localStorage.getItem('yt_linked') === 'true') {
+        // Check if we have an active linked email stored locally
+        const activeUserEmail = localStorage.getItem('yt_user_email');
+        if (activeUserEmail) {
             document.getElementById('auth-section').classList.add('hidden');
             document.getElementById('upload-section').classList.remove('hidden');
+            if (urlParams.get('linked') === 'success') {
+                document.getElementById('status-message').classList.remove('hidden');
+            }
         }
 
         function showError(msg) {
@@ -306,9 +316,14 @@
                 return;
             }
 
+            const userEmail = localStorage.getItem('yt_user_email');
+            if (!userEmail) {
+                alert("Session expired. Please link your YouTube account again.");
+                location.reload();
+                return;
+            }
+
             const file = fileInput.files[0];
-            
-            // Grab user inputs
             const userTitle = document.getElementById('video-title').value;
             const userDesc = document.getElementById('video-desc').value;
             
@@ -316,7 +331,7 @@
             progress.innerText = "Requesting upload session from backend...";
 
             try {
-                // Step 1: Ask backend for the Resumable Session URL, passing custom title/description
+                // Step 1: Ask backend for the Resumable Session URL, passing the active user's email
                 const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
                     method: 'POST',
                     headers: { 
@@ -326,8 +341,9 @@
                     body: JSON.stringify({
                         fileSize: file.size,
                         fileType: file.type,
-                        title: userTitle || file.name, // Falls back to file name if left blank
-                        description: userDesc || "Pending verification video submission." // Falls back if left blank
+                        title: userTitle || file.name,
+                        description: userDesc || "Pending verification video submission.",
+                        userEmail: userEmail // Dynamically passes the logged-in user email!
                     })
                 });
 
