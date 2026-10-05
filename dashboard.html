@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Here is the updated dashboard.html file. It has been updated with the exact mobile optimization layout, breakpoint (768px), and stacked header styling from index.html, while keeping all of your upload logic, backend integration, and functionality completely untouched.   HTML<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -197,12 +197,37 @@
             margin-top: 3rem;
         }
 
-        /* Mobile Optimization */
-        @media (max-width: 600px) {
-            header { padding: 0.75rem 1rem; }
-            .logo { height: 32px; }
-            .container { padding: 1rem; }
-            .card { padding: 1.5rem; }
+        /* Mobile Optimization (Matched to index.html design specs) */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 0.75rem;
+                padding: 1rem;
+                align-items: flex-start;
+            }
+            header > a {
+                align-self: flex-start;
+            }
+            header > div {
+                display: flex;
+                justify-content: flex-start;
+                gap: 0.35rem;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .nav-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+            .logo {
+                height: 36px;
+            }
+            .container { 
+                padding: 1rem; 
+            }
+            .card { 
+                padding: 1.5rem; 
+            }
         }
     </style>
 </head>
