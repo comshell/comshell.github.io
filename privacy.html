@@ -4,47 +4,235 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ComShell | Privacy Policy</title>
-    <!-- Use your existing CSS styles from dashboard.html here -->
+    <!-- Google Font: Oswald -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-teal: #2aa6ad;
+            --brand-red: #d9383a;
+            --bg-dark: #edf6f7;        /* Soft pastel slate background */
+            --card-bg: #ffffff;        /* Crisp white for central cards */
+            --navy-dark: #0f172a;      /* Rich navy for Header */
+            --border-color: #e2e8f0;    /* Light borders */
+            --text-light: #0f172a;     /* Dark text for white areas */
+            --text-muted: #475569;     /* Subtext for white areas */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--navy-dark);
+            border-bottom: 1px solid #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+        .nav-btn {
+            background-color: var(--brand-teal);
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s ease;
+        }
+        .nav-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 3rem 1.5rem;
+        }
+
+        /* Central Card Component for Policy */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--brand-teal);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+            margin: 1.5rem 0 2rem 0;
+            text-align: left;
+        }
+        
+        .card h1 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 2.2rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .card p.last-updated {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .card h2 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .card ul {
+            margin: 0 0 1.25rem 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .card a {
+            color: var(--brand-teal);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 0.75rem;
+                padding: 1rem;
+                align-items: flex-start;
+            }
+            header > a {
+                align-self: flex-start;
+            }
+            header > div {
+                display: flex;
+                justify-content: flex-start;
+                gap: 0.35rem;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .nav-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+            .logo {
+                height: 36px;
+            }
+            .container { 
+                padding: 1rem; 
+            }
+            .card { 
+                padding: 1.5rem; 
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Your standard header here -->
 
-    <div class="container" style="max-width: 800px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 12px;">
-        <h1>Privacy Policy</h1>
-        <p><em>Last updated: October 2026</em></p>
+    <header>
+        <a href="index.html">
+            <img src="ComShell-horizontal-trans.png" alt="ComShell Logo" class="logo">
+        </a>
+        <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="dashboard.html" class="nav-btn">SUP</a>
+            <a href="privacy.html" class="nav-btn">Privacy Policy</a>
+            <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
+        </div>
+    </header>
 
-        <h2>1. Introduction</h2>
-        <p>Welcome to ComShell ("we", "our", or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our website and the Safe Upload Pipeline.</p>
+    <div class="container">
+        <div class="card">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated"><em>Last updated: October 2026</em></p>
 
-        <h2>2. Information We Collect</h2>
-        <p>When you interact with our platform and link your YouTube account, we collect:</p>
-        <ul>
-            <li><strong>Google Account Information:</strong> Your email address, obtained securely via Google OAuth login, to verify that you are an authorized ComShell customer.</li>
-            <li><strong>OAuth Tokens:</strong> Encrypted authorization and refresh tokens provided by Google, which allow our backend to upload videos to your YouTube channel on your behalf.</li>
-            <li><strong>Video Metadata:</strong> Titles, descriptions, and file details you input when submitting a video through our pipeline.</li>
-        </ul>
+            <h2>1. Introduction</h2>
+            <p>Welcome to ComShell ("we", "our", or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our website and the Safe Upload Pipeline.</p>
 
-        <h2>3. How We Use Your Information</h2>
-        <p>We use the information we collect strictly for the following purposes:</p>
-        <ul>
-            <li>To authenticate your identity and check authorization against our secure customer database.</li>
-            <li>To facilitate direct, secure video uploads to your YouTube channel (all uploads default to "Private" status).</li>
-            <li>To maintain the security and operational integrity of our upload pipeline.</li>
-        </ul>
+            <h2>2. Information We Collect</h2>
+            <p>When you interact with our platform and link your YouTube account, we collect:</p>
+            <ul>
+                <li><strong>Google Account Information:</strong> Your email address, obtained securely via Google OAuth login, to verify that you are an authorized ComShell customer.</li>
+                <li><strong>OAuth Tokens:</strong> Encrypted authorization and refresh tokens provided by Google, which allow our backend to upload videos to your YouTube channel on your behalf.</li>
+                <li><strong>Video Metadata:</strong> Titles, descriptions, and file details you input when submitting a video through our pipeline.</li>
+            </ul>
 
-        <h2>4. Data Storage and Security</h2>
-        <p>We take security seriously. All sensitive Google OAuth refresh tokens are encrypted at rest using advanced cryptographic standards before being stored in our secure database (Supabase). Communication between your browser, our servers, and Google is fully encrypted via HTTPS/TLS.</p>
+            <h2>3. How We Use Your Information</h2>
+            <p>We use the information we collect strictly for the following purposes:</p>
+            <ul>
+                <li>To authenticate your identity and check authorization against our secure customer database.</li>
+                <li>To facilitate direct, secure video uploads to your YouTube channel (all uploads default to "Private" status).</li>
+                <li>To maintain the security and operational integrity of our upload pipeline.</li>
+            </ul>
 
-        <h2>5. Google API Services & Limited Use Disclosure</h2>
-        <p>ComShell's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements.</p>
+            <h2>4. Data Storage and Security</h2>
+            <p>We take security seriously. All sensitive Google OAuth refresh tokens are encrypted at rest using advanced cryptographic standards before being stored in our secure database (Supabase). Communication between your browser, our servers, and Google is fully encrypted via HTTPS/TLS.</p>
 
-        <h2>6. Data Sharing and Disclosure</h2>
-        <p>We do not sell, trade, or otherwise transfer your personal data or Google user data to outside parties. Your data is used exclusively to provide and secure your third-party uploading functionality.</p>
+            <h2>5. Google API Services & Limited Use Disclosure</h2>
+            <p>ComShell's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements.</p>
 
-        <h2>7. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy or our data practices, please contact us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a></p>
+            <h2>6. Data Sharing and Disclosure</h2>
+            <p>We do not sell, trade, or otherwise transfer your personal data or Google user data to outside parties. Your data is used exclusively to provide and secure your third-party uploading functionality.</p>
+
+            <h2>7. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or our data practices, please contact us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a></p>
+        </div>
     </div>
 
-    <!-- Your standard footer here -->
+    <footer>
+        <p>&copy; 2026 ComShell. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
