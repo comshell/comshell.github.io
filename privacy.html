@@ -71,6 +71,14 @@
             padding: 1.5rem 1.5rem 3rem 1.5rem;
         }
 
+        /* Highlight Color Utilities */
+        .highlight-teal {
+            color: var(--brand-teal);
+        }
+        .highlight-red {
+            color: var(--brand-red);
+        }
+
         /* Central Card Component for Policy */
         .card {
             background: var(--card-bg);
@@ -194,46 +202,8 @@
 
     <div class="container">
         <div class="card">
-            <h1 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.5px;">
-    <span class="highlight-teal">Privacy</span> <span class="highlight-red">Policy</span></h1>
+            <h1><span class="highlight-teal">Privacy</span> <span class="highlight-red">Policy</span></h1>
             <p class="last-updated"><em>Last updated: October 2026</em></p>
 
             <h2>1. Introduction</h2>
-            <p>Welcome to ComShell ("we", "our", or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our website and the Safe Upload Pipeline.</p>
-
-            <h2>2. Information We Collect</h2>
-            <p>When you interact with our platform and link your YouTube account, we collect:</p>
-            <ul>
-                <li><strong>Google Account Information:</strong> Your email address, obtained securely via Google OAuth login, to verify that you are an authorized ComShell customer.</li>
-                <li><strong>OAuth Tokens:</strong> Encrypted authorization and refresh tokens provided by Google, which allow our backend to upload videos to your YouTube channel on your behalf.</li>
-                <li><strong>Video Metadata:</strong> Titles, descriptions, and file details you input when submitting a video through our pipeline.</li>
-            </ul>
-
-            <h2>3. How We Use Your Information</h2>
-            <p>We use the information we collect strictly for the following purposes:</p>
-            <ul>
-                <li>To authenticate your identity and check authorization against our secure customer database.</li>
-                <li>To facilitate direct, secure video uploads to your YouTube channel (all uploads default to "Private" status).</li>
-                <li>To maintain the security and operational integrity of our upload pipeline.</li>
-            </ul>
-
-            <h2>4. Data Storage and Security</h2>
-            <p>We take security seriously. All sensitive Google OAuth refresh tokens are encrypted at rest using advanced cryptographic standards before being stored in our secure database (Supabase). Communication between your browser, our servers, and Google is fully encrypted via HTTPS/TLS.</p>
-
-            <h2>5. Google API Services & Limited Use Disclosure</h2>
-            <p>ComShell's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements.</p>
-
-            <h2>6. Data Sharing and Disclosure</h2>
-            <p>We do not sell, trade, or otherwise transfer your personal data or Google user data to outside parties. Your data is used exclusively to provide and secure your third-party uploading functionality.</p>
-
-            <h2>7. Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy or our data practices, please contact us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a></p>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 ComShell. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
+            <p>Welcome to ComShell ("we", "our", or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when
