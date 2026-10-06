@@ -71,12 +71,31 @@
             padding: 1.5rem 1.5rem 3rem 1.5rem;
         }
 
-        /* Highlight Color Utilities */
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 1.5rem 0 1rem 0;
+        }
+        h1 {
+            color: var(--text-light);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         .highlight-teal {
             color: var(--brand-teal);
         }
         .highlight-red {
             color: var(--brand-red);
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         /* Central Card Component for Policy */
@@ -88,23 +107,6 @@
             box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
             margin: 1.5rem 0 2rem 0;
             text-align: left;
-        }
-        
-        .card h1 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 2.2rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .card p.last-updated {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
         }
 
         .card h2 {
@@ -201,40 +203,43 @@
     </header>
 
     <div class="container">
-        <div class="card">
+        
+        <section class="hero">
             <h1><span class="highlight-teal">Privacy</span> <span class="highlight-red">Policy</span></h1>
-            <p class="last-updated"><em>Last updated: October 2026</em></p>
+            <p>Last updated: October 2026</p>
+        </section>
 
+        <div class="card">
             <h2>1. Introduction</h2>
-            <p>Welcome to ComShell ("we", "our", or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our website and the Safe Upload Pipeline[cite: 4].</p>
+            <p>Welcome to ComShell ("we", "our", or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our website and the Safe Upload Pipeline.</p>
 
             <h2>2. Information We Collect</h2>
-            <p>When you interact with our platform and link your YouTube account, we collect[cite: 4]:</p>
+            <p>When you interact with our platform and link your YouTube account, we collect:</p>
             <ul>
-                <li><strong>Google Account Information:</strong> Your email address, obtained securely via Google OAuth login, to verify that you are an authorized ComShell customer[cite: 4].</li>
-                <li><strong>OAuth Tokens:</strong> Encrypted authorization and refresh tokens provided by Google, which allow our backend to upload videos to your YouTube channel on your behalf[cite: 4].</li>
-                <li><strong>Video Metadata:</strong> Titles, descriptions, and file details you input when submitting a video through our pipeline[cite: 4].</li>
+                <li><strong>Google Account Information:</strong> Your email address, obtained securely via Google OAuth login, to verify that you are an authorized ComShell customer.</li>
+                <li><strong>OAuth Tokens:</strong> Encrypted authorization and refresh tokens provided by Google, which allow our backend to upload videos to your YouTube channel on your behalf.</li>
+                <li><strong>Video Metadata:</strong> Titles, descriptions, and file details you input when submitting a video through our pipeline.</li>
             </ul>
 
             <h2>3. How We Use Your Information</h2>
-            <p>We use the information we collect strictly for the following purposes[cite: 4]:</p>
+            <p>We use the information we collect strictly for the following purposes:</p>
             <ul>
-                <li>To authenticate your identity and check authorization against our secure customer database[cite: 4].</li>
-                <li>To facilitate direct, secure video uploads to your YouTube channel (all uploads default to "Private" status)[cite: 4].</li>
-                <li>To maintain the security and operational integrity of our upload pipeline[cite: 4].</li>
+                <li>To authenticate your identity and check authorization against our secure customer database.</li>
+                <li>To facilitate direct, secure video uploads to your YouTube channel (all uploads default to "Private" status).</li>
+                <li>To maintain the security and operational integrity of our upload pipeline.</li>
             </ul>
 
             <h2>4. Data Storage and Security</h2>
-            <p>We take security seriously. All sensitive Google OAuth refresh tokens are encrypted at rest using advanced cryptographic standards before being stored in our secure database (Supabase). Communication between your browser, our servers, and Google is fully encrypted via HTTPS/TLS[cite: 4].</p>
+            <p>We take security seriously. All sensitive Google OAuth refresh tokens are encrypted at rest using advanced cryptographic standards before being stored in our secure database (Supabase). Communication between your browser, our servers, and Google is fully encrypted via HTTPS/TLS.</p>
 
             <h2>5. Google API Services & Limited Use Disclosure</h2>
-            <p>ComShell's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements[cite: 4].</p>
+            <p>ComShell's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements.</p>
 
             <h2>6. Data Sharing and Disclosure</h2>
-            <p>We do not sell, trade, or otherwise transfer your personal data or Google user data to outside parties. Your data is used exclusively to provide and secure your third-party uploading functionality[cite: 4].</p>
+            <p>We do not sell, trade, or otherwise transfer your personal data or Google user data to outside parties. Your data is used exclusively to provide and secure your third-party uploading functionality.</p>
 
             <h2>7. Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy or our data practices, please contact us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a>[cite: 4]</p>
+            <p>If you have any questions about this Privacy Policy or our data practices, please contact us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a></p>
         </div>
     </div>
 
