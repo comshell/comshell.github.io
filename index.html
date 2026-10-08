@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ComShell | Home</title>
+    <title>ComShell | Safe Creator Launchpad</title>
     <!-- Google Font: Oswald -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
         :root {
             --brand-teal: #2aa6ad;
             --brand-red: #d9383a;
@@ -74,14 +74,20 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 1rem 0 1.5rem 0;
+            padding: 1rem 0;
         }
         h1 {
             color: var(--text-light);
             font-size: clamp(2rem, 5vw, 3.2rem);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             line-height: 1.2;
         }
+		
+		/* Hero CTA Container */
+        .hero-cta {
+            margin-top: 0.15rem; /* Reset margin since h1 margin handles the spacing */
+        }
+		
         .highlight-teal {
             color: var(--brand-teal);
         }
@@ -92,7 +98,12 @@
             color: var(--text-muted);
             font-size: 1.25rem;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        /* Hero CTA Container */
+        .hero-cta {
+            margin-top: 3.5rem;
         }
 
         /* Package Card Section */
@@ -102,11 +113,10 @@
             border-radius: 16px;
             padding: 2.5rem;
             box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
-            margin: 1.5rem 0 2rem 0;
+            margin: 2rem 0 2rem 0;
             text-align: center;
         }
         
-        /* Oswald YouTube-Style Font for Launchpad Heading */
         .package-card h2 {
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
@@ -115,9 +125,9 @@
             color: var(--text-light);
             margin-bottom: 1rem;
         }
-        .package-card p {
+        .package-card > p {
             color: var(--text-muted);
-            margin: 0 auto 1.5rem auto;
+            margin: 0 auto 2rem auto;
             max-width: 750px;
         }
 
@@ -129,7 +139,7 @@
             text-align: left;
         }
         .features-list li {
-            padding: 1rem 0;
+            padding: 1.2rem 0;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-muted);
             display: flex;
@@ -148,7 +158,7 @@
             display: block;
             color: var(--text-light);
             margin-bottom: 0.25rem;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
         .features-list p {
             color: var(--text-muted);
@@ -171,6 +181,7 @@
             text-align: center;
             cursor: pointer;
             transition: opacity 0.2s ease;
+            box-shadow: 0 4px 12px rgba(217, 56, 58, 0.25);
         }
         .btn-primary:hover {
             opacity: 0.9;
@@ -246,31 +257,31 @@
         .launchpad-form h3 {
             color: var(--text-light);
             font-size: 1.6rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
             text-align: center;
             padding-right: 1.5rem;
         }
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.625rem; /* Reduced to roughly half its original size */
         }
         .form-group label {
             display: block;
             color: var(--text-light);
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.25rem; /* Tighter gap between label and input */
+            font-size: 0.9rem;
         }
         .form-group input[type="text"],
         .form-group input[type="email"],
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 0.9rem;
             background: #f1f5f9;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             color: var(--text-light);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: inherit;
         }
         .form-group input[type="text"]:focus,
@@ -284,7 +295,7 @@
         .radio-group {
             display: flex;
             gap: 1.5rem;
-            padding: 0.25rem 0;
+            padding: 0.1rem 0;
         }
         .radio-group label {
             font-weight: normal;
@@ -311,7 +322,7 @@
             margin-bottom: 0.75rem;
         }
         .about-section p {
-            color: #f8fafc; /* Crisp white text inside the navy box */
+            color: #f8fafc;
             font-size: 1rem;
             max-width: 750px;
             margin: 0 auto;
@@ -327,7 +338,7 @@
             margin-top: 3rem;
         }
 
-      /* Mobile Optimization */
+        /* Mobile Optimization */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -335,7 +346,6 @@
                 padding: 1rem;
                 align-items: flex-start;
             }
-            /* Force the logo link to stay on the left */
             header > a {
                 align-self: flex-start;
             }
@@ -358,7 +368,7 @@
 </head>
 <body>
 
-   <header>
+    <header>
         <a href="index.html">
             <img src="ComShell-horizontal-trans.png" alt="ComShell Logo" class="logo">
         </a>
@@ -369,77 +379,61 @@
             <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
         </div>
     </header>
+
     <div class="container">
         
         <section class="hero">
             <h1>Fuel Their<br><span class="highlight-teal">Creative Spark.</span> Shield Their <span class="highlight-red">Online World</span></h1>
-            <p>Full safety audit and artistic branding for young YouTubers. Supporting creative freedom and delivering peace of mind for parents.</p>
+            
+            <div class="hero-cta">
+                <button class="btn-primary openModalTrigger">Request a Quote</button>
+            </div>
         </section>
 
         <section class="package-card">
-          <h2 style="font-family: 'Oswald', sans-serif; font-weight: 700;">
-    THE <span style="color: var(--brand-red);">SAFE</span> <span style="color: var(--brand-teal);">CREATOR</span> LAUNCHPAD
-</h2>
-            <p><em>Launching a YouTube channel should be exciting, not stressful. We give young creators the tools, graphics and confidence to stand out from day one - while setting up hard-hitting privacy shields to defend against cyberbullying, personal data exposure and inappropriate content.</em></p>
+            <h2>THE <span style="color: var(--brand-red);">SAFE</span> <span style="color: var(--brand-teal);">CREATOR</span> LAUNCHPAD</h2>
+            <p><em>We design custom security architecture for young creators and YouTubers - allowing them to express their creativity safely and giving parents complete peace of mind. We give children the tools, graphics and guidance to feel confident creating on YouTube, while setting up hard-hitting privacy shields to defend against cyberbullying, personal data exposure and inappropriate content.</em></p>
             
             <ul class="features-list">
                 <li>
                     <div>
-                        <strong style="color: var(--brand-red);">Physical Security Key & Account Hardening</strong>
-                        <p>You get a physical hardware key to lock down your child’s account – preventing password theft and any unauthorized logins. Simply tap against your phone to unlock.</p>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <strong style="color: var(--brand-red);">Parental Control & Comment Shields</strong>
-                        <p>YouTube Studio setup directly on your device – featuring inbuilt auto-moderation and giving you the ability to review comments before they ever go live.</p>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <strong style="color: var(--brand-red);">Custom Channel Branding & Studio Art</strong>
-                        <p>A complete visual makeover including a custom logo, channel banner and an animated video intro / outro – so your child’s channel looks legitimate and professional from day one.</p>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <strong style="color: var(--brand-red);">Dedicated Storage Drive for Video Game Streamers</strong>
-                        <p>High-speed USB storage drive pre-configured for budding video game streamers to easily save, organize and transfer their game clips to the editing studio – removing the risks of live streaming.</p>
-                    </div>
-                </li>
-                <li>
-                    <div>
                         <strong style="color: var(--brand-red);">The Safe Upload Pipeline</strong>
-                        <p>Third-party video uploading configured directly on your child’s device, bypassing the need for YouTube’s app. All uploads default to "Private" until you review them, giving your child full creative freedom while you retain 100% ownership and administrative control.</p>
+                        <p>Exclusive use of our custom-built YouTube uploader. This allows young creators to upload their videos without the need for any social media apps on their phone. All videos will upload as 'Private' until you review the content and decide to make it public.</p>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <strong style="color: var(--brand-red);">Privacy Shields & Separate Channels</strong>
-                        <p>Device location metadata turned off on creator devices, combined with a dedicated public business email to keep all your family personal details private.</p>
+                        <strong style="color: var(--brand-red);">The ComShell Key</strong>
+                        <p>Access to the YouTube channel is locked on your phone behind a physical key - simply tap against the back of your phone to access all their content, review or delete comments and change their videos' visibility. This prevents any unauthorized logins and password theft - a common problem for young YouTubers.</p>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <strong style="color: var(--brand-red);">Device-Level Shielding & Filter App</strong>
-                        <p>We install and configure a dedicated protection app on your child’s device. This directly protects their phone or tablet from dangerous content 24/7, without having to rely on your broadband provider.</p>
+                        <strong style="color: var(--brand-red);">Dedicated Storage Drive for Video Gamers</strong>
+                        <p>Many young creators want to stream their video games, but linking Playstation or Xbox accounts directly to YouTube is risky. We provide a custom USB storage device that transfers videos between games console and mobile, allowing them to safely publish their recordings.</p>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <strong style="color: var(--brand-red);">Internet Safety Poster & Anti-Phishing Guide</strong>
-                        <p>An internet safety poster for young creators to stick on their wall, paired with an anti-phishing technical cheat sheet for parents.</p>
+                        <strong style="color: var(--brand-red);">Professional Channel Branding</strong>
+                        <p>Our in-house artists provide a complete visual makeover for the channel based on your child's interests. We design logos, banners, watermarks and custom branding to ensure their channel looks legitimate and professional from day one.</p>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <strong style="color: var(--brand-red);">COPPA & Platform Compliance Setup</strong>
-                        <p>We configure the channel’s privacy defaults to align with COPPA and YouTube safety guidelines – protecting your child’s privacy without you having to read through complex terms of service.</p>
+                        <strong style="color: var(--brand-red);">Device Filtering & Comment Shields</strong>
+                        <p>We configure device-level network filtering directly on your child's device to block dangerous content 24/7, combined with multiple YouTube moderation tools to hugely reduce the chances of cyber-bullying and negative content from ever reaching them.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong style="color: var(--brand-red);">Mini Wall Poster & Parent Guide</strong>
+                        <p>We provide young creators with a simple internet-safety poster for their wall, to ensure they know the basics of digital hygiene before they begin creating content. We also provide parents with an anti-phishing cheat sheet - if the channel becomes successful, our guide ensures you can protect yourself against threats and scams.</p>
                     </div>
                 </li>
             </ul>
 
-            <button id="openModalBtn" class="btn-primary">Ask About Launchpad Package</button>
+            <button class="btn-primary openModalTrigger">Request a Quote</button>
         </section>
 
         <section class="about-section">
@@ -454,11 +448,16 @@
             <button id="closeModalBtn" class="close-btn" aria-label="Close Modal">&times;</button>
             
             <form action="https://formspree.io/f/mdeonlbw" method="POST" class="launchpad-form" id="launchpadForm">
-                <h3>Ask About Launchpad Package</h3>
+                <h3>Ask About the Safe Creator Launchpad</h3>
 
                 <div class="form-group">
                     <label for="parent-name">Your Name</label>
                     <input type="text" id="parent-name" name="Parent Name" required placeholder="Type your name here..">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="Message" rows="3" placeholder="Write your message here, answer the questions below and we'll get back to you as soon as possible.."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -473,13 +472,13 @@
                         <option value="Under 8">Under 8</option>
                         <option value="8-10">8 – 10</option>
                         <option value="11-13">11 – 13</option>
-                        <option value="14+">14+</option>
+                        <option value="14-16">14 - 16</option>
                     </select>
                 </div>
 
-                 <div class="form-group">
-                    <label for="child-age">What will they record with?</label>
-                    <select id="child-age" name="Child Age" required>
+                <div class="form-group">
+                    <label for="recording-device">What will they record with?</label>
+                    <select id="recording-device" name="Recording Device" required>
                         <option value="" disabled selected>Select device</option>
                         <option value="Android phone or tablet">Android phone or tablet</option>
                         <option value="iPhone or iPad">iPhone or iPad</option>
@@ -496,12 +495,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="Message" rows="3" placeholder="Write your message here.."></textarea>
-                </div>
-
-                <button type="submit" class="btn-primary" style="width: 100%;">Send</button>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 0.5rem;">Send</button>
             </form>
 
             <div id="successMessage" style="display: none; text-align: center; padding: 2rem 1rem;">
@@ -516,16 +510,18 @@
     </footer>
 
     <script>
-        const openModalBtn = document.getElementById('openModalBtn');
+        const openModalBtns = document.querySelectorAll('.openModalTrigger');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const bookingModal = document.getElementById('bookingModal');
         const launchpadForm = document.getElementById('launchpadForm');
         const successMessage = document.getElementById('successMessage');
 
-        // Open modal
-        openModalBtn.addEventListener('click', () => {
-            bookingModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        // Open modal for all buttons with the trigger class
+        openModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                bookingModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
         });
 
         // Close modal function (resets views)
@@ -533,7 +529,6 @@
             bookingModal.classList.remove('active');
             document.body.style.overflow = '';
             
-            // Soft reset back to form view after user closes popup
             setTimeout(() => {
                 launchpadForm.reset();
                 launchpadForm.style.display = 'block';
@@ -543,17 +538,15 @@
 
         closeModalBtn.addEventListener('click', closeModal);
 
-        // Close on clicking outside modal
         bookingModal.addEventListener('click', (e) => {
             if (e.target === bookingModal) closeModal();
         });
 
-        // Close on Esc key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && bookingModal.classList.contains('active')) closeModal();
         });
 
-        // Handle Form Submission silently without Formspree redirect
+        // Handle Form Submission silently via Formspree
         launchpadForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -586,6 +579,5 @@
             }
         });
     </script>
-
 </body>
 </html>
