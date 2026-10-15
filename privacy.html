@@ -58,10 +58,51 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: normal;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
             transition: opacity 0.2s ease;
         }
         .nav-btn:hover {
             opacity: 0.9;
+        }
+
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 170px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            z-index: 200;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .dropdown-menu.active {
+            display: block;
+        }
+        .dropdown-menu a {
+            color: var(--text-light);
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .dropdown-menu a:hover {
+            background-color: var(--bg-dark);
+            color: var(--brand-teal);
         }
 
         /* Main Container */
@@ -78,10 +119,11 @@
         }
         h1 {
             color: var(--text-light);
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-size: clamp(2rem, 5vw, 3.2rem);
             margin-bottom: 0.5rem;
             line-height: 1.2;
             font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         .highlight-teal {
@@ -110,7 +152,7 @@
 
         .card h2 {
             font-family: 'Oswald', sans-serif;
-            text-transform: uppercase; /* Forces section titles to ALL CAPS */
+            text-transform: uppercase;
             letter-spacing: 0.5px;
             font-size: 1.3rem;
             color: var(--text-light);
@@ -196,7 +238,16 @@
         <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
             <a href="index.html" class="nav-btn">Home</a>
             <a href="dashboard.html" class="nav-btn">SUP</a>
-            <a href="privacy.html" class="nav-btn">Privacy Policy</a>
+            
+            <!-- Legal Dropdown Button -->
+            <div class="dropdown">
+                <button class="nav-btn" id="legalDropdownBtn">Legal ▾</button>
+                <div class="dropdown-menu" id="legalDropdownMenu">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+
             <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
         </div>
     </header>
@@ -213,7 +264,7 @@
             <p>Welcome to ComShell. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our website and the Safe Upload Pipeline.</p>
 
             <h2>2. Information We Collect</h2>
-            <p>When you interact with our platform and link your YouTube account, we collect:</p>
+            <p>When you interact with our platform and link your YouTube account, we collect[cite: 3]:</p>
             <ul>
                 <li><strong>Google Account Information:</strong> Your email address, obtained securely via Google OAuth login, to verify that you are an authorized ComShell customer.</li>
                 <li><strong>OAuth Tokens:</strong> Encrypted authorization and refresh tokens provided by Google, which allow our backend to upload videos to your YouTube channel on your behalf.</li>
@@ -245,6 +296,24 @@
     <footer>
         <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Legal Dropdown Toggle Logic
+        const legalDropdownBtn = document.getElementById('legalDropdownBtn');
+        const legalDropdownMenu = document.getElementById('legalDropdownMenu');
+
+        legalDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            legalDropdownMenu.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking anywhere else on the page
+        document.addEventListener('click', (e) => {
+            if (!legalDropdownBtn.contains(e.target) && !legalDropdownMenu.contains(e.target)) {
+                legalDropdownMenu.classList.remove('active');
+            }
+        });
+    </script>
 
 </body>
 </html>
