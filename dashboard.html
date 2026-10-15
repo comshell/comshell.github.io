@@ -58,10 +58,51 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: normal;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
             transition: opacity 0.2s ease;
         }
         .nav-btn:hover {
             opacity: 0.9;
+        }
+
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 170px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            z-index: 200;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .dropdown-menu.active {
+            display: block;
+        }
+        .dropdown-menu a {
+            color: var(--text-light);
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .dropdown-menu a:hover {
+            background-color: var(--bg-dark);
+            color: var(--brand-teal);
         }
 
         /* Main Container */
@@ -197,37 +238,12 @@
             margin-top: 3rem;
         }
 
-        /* Mobile Optimization (Matched to index.html design specs) */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 0.75rem;
-                padding: 1rem;
-                align-items: flex-start;
-            }
-            header > a {
-                align-self: flex-start;
-            }
-            header > div {
-                display: flex;
-                justify-content: flex-start;
-                gap: 0.35rem;
-                flex-wrap: wrap;
-                width: 100%;
-            }
-            .nav-btn {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.85rem;
-            }
-            .logo {
-                height: 36px;
-            }
-            .container { 
-                padding: 1rem; 
-            }
-            .card { 
-                padding: 1.5rem; 
-            }
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            header { padding: 0.75rem 1rem; }
+            .logo { height: 32px; }
+            .container { padding: 1rem; }
+            .card { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -240,7 +256,16 @@
         <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
             <a href="index.html" class="nav-btn">Home</a>
             <a href="dashboard.html" class="nav-btn">SUP</a>
-            <a href="privacy.html" class="nav-btn">Privacy Policy</a>
+            
+            <!-- Legal Dropdown Button -->
+            <div class="dropdown">
+                <button class="nav-btn" id="legalDropdownBtn">Legal ▾</button>
+                <div class="dropdown-menu" id="legalDropdownMenu">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+
             <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
         </div>
     </header>
@@ -248,14 +273,14 @@
     <div class="container">
         
         <section class="hero">
-            <h1>Safe <span class="highlight-teal">Upload</span> <span class="highlight-red">Pipeline</span></h1>
-            <p>Secure third-party YouTube uploading</p>
+            <h1>The Safe <span class="highlight-teal">Upload</span> <span class="highlight-red">Pipeline</span></h1>
+            <p>Secure third-party YouTube uploading[cite: 6].</p>
         </section>
 
         <!-- Auth Section Card -->
         <div id="auth-section" class="card">
             <h2>Link Account</h2>
-            <p>To begin secure video uploading, please link your YouTube account first.<br><em><span class="highlight-red">Please note, only registered ComShell customers can link accounts!</span></em></p>
+            <p>To begin secure video uploading, you must link your YouTube account first[cite: 6].</p>
             <a id="login-btn" href="#" class="btn-primary" style="max-width: 300px;">Link YouTube Account</a>
         </div>
 
@@ -263,17 +288,17 @@
         <div id="upload-section" class="card hidden">
             <div id="status-message" class="success hidden">YouTube Account Linked Successfully!</div>
             <h2>Upload a Video</h2>
-            <p>Uploaded videos will remain <strong>Private</strong> until changed by a parent or guardian.<br><em><span class="highlight-red">Please note, only registered ComShell customers can use the Safe Upload Pipeline!</span></em></p>
+            <p>Uploaded videos remain <strong>Private</strong> until changed by a parent or guardian[cite: 6].<br><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
             
             <div style="max-width: 500px; margin: 0 auto; text-align: left;">
                 <div class="form-group">
                     <label for="video-title">Title</label>
-                    <input type="text" id="video-title" placeholder="Name your video here..">
+                    <input type="text" id="video-title" placeholder="Give your video a title">
                 </div>
                 
                 <div class="form-group">
                     <label for="video-desc">Description</label>
-                    <textarea id="video-desc" placeholder="Write your description here.." rows="3"></textarea>
+                    <textarea id="video-desc" placeholder="Write a description for your video" rows="3"></textarea>
                 </div>
 
                 <div class="file-input-wrapper">
@@ -291,7 +316,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 ComShell. All rights reserved.</p>
+        <p>&copy; 2026 ComShell. All rights reserved.[cite: 6]</p>
     </footer>
 
     <script>
@@ -400,6 +425,22 @@
                 progress.innerText = "";
             }
         }
+
+        // Legal Dropdown Toggle Logic
+        const legalDropdownBtn = document.getElementById('legalDropdownBtn');
+        const legalDropdownMenu = document.getElementById('legalDropdownMenu');
+
+        legalDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            legalDropdownMenu.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking anywhere else on the page
+        document.addEventListener('click', (e) => {
+            if (!legalDropdownBtn.contains(e.target) && !legalDropdownMenu.contains(e.target)) {
+                legalDropdownMenu.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
