@@ -58,10 +58,51 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: normal;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
             transition: opacity 0.2s ease;
         }
         .nav-btn:hover {
             opacity: 0.9;
+        }
+
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 170px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            z-index: 200;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .dropdown-menu.active {
+            display: block;
+        }
+        .dropdown-menu a {
+            color: var(--text-light);
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .dropdown-menu a:hover {
+            background-color: var(--bg-dark);
+            color: var(--brand-teal);
         }
 
         /* Main Container */
@@ -375,7 +416,16 @@
         <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
             <a href="index.html" class="nav-btn">Home</a>
             <a href="dashboard.html" class="nav-btn">SUP</a>
-            <a href="privacy.html" class="nav-btn">Privacy Policy</a>
+            
+            <!-- Legal Dropdown Button -->
+            <div class="dropdown">
+                <button class="nav-btn" id="legalDropdownBtn">Legal ▾</button>
+                <div class="dropdown-menu" id="legalDropdownMenu">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+
             <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
         </div>
     </header>
@@ -576,6 +626,22 @@
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send';
+            }
+        });
+
+        // Legal Dropdown Toggle Logic
+        const legalDropdownBtn = document.getElementById('legalDropdownBtn');
+        const legalDropdownMenu = document.getElementById('legalDropdownMenu');
+
+        legalDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            legalDropdownMenu.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking anywhere else on the page
+        document.addEventListener('click', (e) => {
+            if (!legalDropdownBtn.contains(e.target) && !legalDropdownMenu.contains(e.target)) {
+                legalDropdownMenu.classList.remove('active');
             }
         });
     </script>
