@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComShell | Terms of Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-teal: #2aa6ad;
+            --brand-red: #d9383a;
+            --bg-dark: #edf6f7;
+            --card-bg: #ffffff;
+            --navy-dark: #0f172a;
+            --border-color: #e2e8f0;
+            --text-light: #0f172a;
+            --text-muted: #475569;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, -apple-system, sans-serif; background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; background-color: var(--navy-dark); border-bottom: 1px solid #1e293b;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { height: 40px; width: auto; display: block; }
+        .nav-btn {
+            background-color: var(--brand-teal); color: #ffffff; padding: 0.6rem 1.2rem;
+            border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem 1.5rem; }
+        
+        .hero { text-align: center; padding: 1.5rem 0 1rem 0; }
+        h1 {
+            color: var(--text-light); font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-family: 'Oswald', sans-serif; letter-spacing: 0.5px;
+        }
+        .highlight-teal { color: var(--brand-teal); }
+        .highlight-red { color: var(--brand-red); }
+
+        .card {
+            background: var(--card-bg); border: 2px solid var(--brand-teal);
+            border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+            margin: 1.5rem 0 2rem 0; text-align: left;
+        }
+        .card h2 {
+            font-family: 'Oswald', sans-serif; text-transform: uppercase;
+            font-size: 1.3rem; color: var(--text-light); margin-top: 1.5rem; margin-bottom: 0.5rem;
+        }
+        .card p, .card ul { color: var(--text-muted); margin-bottom: 1rem; font-size: 1rem; }
+        .card ul { margin-left: 1.5rem; }
+        .card li { margin-bottom: 0.5rem; }
+        .card a { color: var(--brand-teal); text-decoration: none; font-weight: 600; }
+
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); margin-top: 3rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html">
+            <img src="ComShell-horizontal-trans.png" alt="ComShell Logo" class="logo">
+        </a>
+        <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="dashboard.html" class="nav-btn">SUP</a>
+            <a href="privacy.html" class="nav-btn">Privacy Policy</a>
+            <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1><span class="highlight-teal">Terms</span> of <span class="highlight-red">Service</span></h1>
+            <p>Last updated: October 2026</p>
+        </section>
+
+        <div class="card">
+            <h2>1. Agreement to Terms</h2>
+            <p>By accessing or using ComShell and our Safe Upload Pipeline, you agree to be bound by these Terms of Service. If you do not agree to all terms, you may not use our service.</p>
+
+            <h2>2. Description of Service</h2>
+            <p>ComShell provides digital tools, channel management setup and a Safe Upload Pipeline designed to assist parents and young creators in securely uploading video content to YouTube. All video uploads executed through ComShell default to "Private" visibility settings.</p>
+
+            <h2>3. Account Eligibility & Authorization</h2>
+            <p>Use of the Safe Upload Pipeline is restricted to authorized ComShell customers. You represent and warrant that you are a parent or guardian, or are operating with explicit parental authorization, when linking YouTube channels and uploading content.</p>
+
+            <h2>4. Acceptable Content & Compliance</h2>
+            <p>Users must comply with all YouTube Terms of Service and Community Guidelines. ComShell does not tolerate the uploading of unlawful, harmful, defamatory or abusive content. Users retain full responsibility for all content transmitted through the service.</p>
+
+            <h2>5. Intellectual Property</h2>
+            <p>You retain full ownership of all original video content submitted via our platform. ComShell does not claim ownership or rights over your video assets or YouTube channel.</p>
+
+            <h2>6. Limitation of Liability</h2>
+            <p>ComShell is provided on an "as is" and "as available" basis. While we employ strict security measures and privacy shields, ComShell shall not be liable for indirect, incidental, or consequential damages resulting from the use or inability to use our services or third-party platform changes.</p>
+
+            <h2>7. Contact Us</h2>
+            <p>For any questions regarding these Terms of Service, please reach out to us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 ComShell. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
