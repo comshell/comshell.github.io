@@ -29,16 +29,67 @@
         }
         .logo { height: 40px; width: auto; display: block; }
         .nav-btn {
-            background-color: var(--brand-teal); color: #ffffff; padding: 0.6rem 1.2rem;
-            border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            background-color: var(--brand-teal);
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: normal;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        .nav-btn:hover { opacity: 0.9; }
+
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 170px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            z-index: 200;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .dropdown-menu.active {
+            display: block;
+        }
+        .dropdown-menu a {
+            color: var(--text-light);
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .dropdown-menu a:hover {
+            background-color: var(--bg-dark);
+            color: var(--brand-teal);
         }
 
         .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem 1.5rem; }
         
         .hero { text-align: center; padding: 1.5rem 0 1rem 0; }
         h1 {
-            color: var(--text-light); font-size: clamp(1.8rem, 4vw, 2.8rem);
-            font-family: 'Oswald', sans-serif; letter-spacing: 0.5px;
+            color: var(--text-light); 
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-family: 'Oswald', sans-serif; 
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
         .highlight-teal { color: var(--brand-teal); }
         .highlight-red { color: var(--brand-red); }
@@ -58,6 +109,31 @@
         .card a { color: var(--brand-teal); text-decoration: none; font-weight: 600; }
 
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); margin-top: 3rem; }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 0.75rem;
+                padding: 1rem;
+                align-items: flex-start;
+            }
+            header > a {
+                align-self: flex-start;
+            }
+            header > div {
+                display: flex;
+                justify-content: flex-start;
+                gap: 0.35rem;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .nav-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+            .logo { height: 36px; }
+        }
     </style>
 </head>
 <body>
@@ -69,7 +145,16 @@
         <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
             <a href="index.html" class="nav-btn">Home</a>
             <a href="dashboard.html" class="nav-btn">SUP</a>
-            <a href="privacy.html" class="nav-btn">Privacy Policy</a>
+            
+            <!-- Legal Dropdown Button -->
+            <div class="dropdown">
+                <button class="nav-btn" id="legalDropdownBtn">Legal ▾</button>
+                <div class="dropdown-menu" id="legalDropdownMenu">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+
             <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
         </div>
     </header>
@@ -77,36 +162,54 @@
     <div class="container">
         <section class="hero">
             <h1><span class="highlight-teal">Terms</span> of <span class="highlight-red">Service</span></h1>
-            <p>Last updated: October 2026</p>
+            <p>Last updated: October 2026[cite: 5]</p>
         </section>
 
         <div class="card">
             <h2>1. Agreement to Terms</h2>
-            <p>By accessing or using ComShell and our Safe Upload Pipeline, you agree to be bound by these Terms of Service. If you do not agree to all terms, you may not use our service.</p>
+            <p>By accessing or using ComShell and our Safe Upload Pipeline, you agree to be bound by these Terms of Service. If you do not agree to all terms, you may not use our service.[cite: 5]</p>
 
             <h2>2. Description of Service</h2>
-            <p>ComShell provides digital tools, channel management setup and a Safe Upload Pipeline designed to assist parents and young creators in securely uploading video content to YouTube. All video uploads executed through ComShell default to "Private" visibility settings.</p>
+            <p>ComShell provides digital tools, channel management setup and a Safe Upload Pipeline designed to assist parents and young creators in securely uploading video content to YouTube. All video uploads executed through ComShell default to "Private" visibility settings.[cite: 5]</p>
 
             <h2>3. Account Eligibility & Authorization</h2>
-            <p>Use of the Safe Upload Pipeline is restricted to authorized ComShell customers. You represent and warrant that you are a parent or guardian, or are operating with explicit parental authorization, when linking YouTube channels and uploading content.</p>
+            <p>Use of the Safe Upload Pipeline is restricted to authorized ComShell customers. You represent and warrant that you are a parent or guardian, or are operating with explicit parental authorization, when linking YouTube channels and uploading content.[cite: 5]</p>
 
             <h2>4. Acceptable Content & Compliance</h2>
-            <p>Users must comply with all YouTube Terms of Service and Community Guidelines. ComShell does not tolerate the uploading of unlawful, harmful, defamatory or abusive content. Users retain full responsibility for all content transmitted through the service.</p>
+            <p>Users must comply with all YouTube Terms of Service and Community Guidelines. ComShell does not tolerate the uploading of unlawful, harmful, defamatory or abusive content. Users retain full responsibility for all content transmitted through the service.[cite: 5]</p>
 
             <h2>5. Intellectual Property</h2>
-            <p>You retain full ownership of all original video content submitted via our platform. ComShell does not claim ownership or rights over your video assets or YouTube channel.</p>
+            <p>You retain full ownership of all original video content submitted via our platform. ComShell does not claim ownership or rights over your video assets or YouTube channel.[cite: 5]</p>
 
             <h2>6. Limitation of Liability</h2>
-            <p>ComShell is provided on an "as is" and "as available" basis. While we employ strict security measures and privacy shields, ComShell shall not be liable for indirect, incidental, or consequential damages resulting from the use or inability to use our services or third-party platform changes.</p>
+            <p>ComShell is provided on an "as is" and "as available" basis. While we employ strict security measures and privacy shields, ComShell shall not be liable for indirect, incidental, or consequential damages resulting from the use or inability to use our services or third-party platform changes.[cite: 5]</p>
 
             <h2>7. Contact Us</h2>
-            <p>For any questions regarding these Terms of Service, please reach out to us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a></p>
+            <p>For any questions regarding these Terms of Service, please reach out to us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a>[cite: 5]</p>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 ComShell. All rights reserved.</p>
+        <p>&copy; 2026 ComShell. All rights reserved.[cite: 5]</p>
     </footer>
+
+    <script>
+        // Legal Dropdown Toggle Logic
+        const legalDropdownBtn = document.getElementById('legalDropdownBtn');
+        const legalDropdownMenu = document.getElementById('legalDropdownMenu');
+
+        legalDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            legalDropdownMenu.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking anywhere else on the page
+        document.addEventListener('click', (e) => {
+            if (!legalDropdownBtn.contains(e.target) && !legalDropdownMenu.contains(e.target)) {
+                legalDropdownMenu.classList.remove('active');
+            }
+        });
+    </script>
 
 </body>
 </html>
