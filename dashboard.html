@@ -192,6 +192,40 @@
             color: var(--text-muted);
         }
 
+        /* Modal Overlay for Success Pop-up */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-card {
+            background: var(--card-bg);
+            border: 2px solid var(--brand-teal);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.25s ease-out;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Call to Action Button */
         .btn-primary {
             display: inline-block;
@@ -208,13 +242,8 @@
             transition: opacity 0.2s ease;
             width: 100%;
         }
-        .btn-primary:hover {
-            opacity: 0.9;
-        }
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .hidden { display: none; }
         .error { color: #dc2626; font-weight: bold; background: #fee2e2; padding: 1rem; border-radius: 8px; margin-top: 15px; border: 1px solid #fca5a5; }
@@ -279,7 +308,7 @@
             </div>
             <p>Uploaded videos remain <strong>Private</strong> until changed by a parent or guardian.<br><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
             
-            <div style="max-width: 500px; margin: 0 auto; text-align: left;">
+            <form id="upload-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
                 <div class="form-group">
                     <label for="video-title">Title</label>
                     <input type="text" id="video-title" placeholder="Give your video a title">
@@ -294,8 +323,8 @@
                     <input type="file" id="video-file" accept="video/mp4,video/quicktime,video/webm,video/x-matroska,video/avi">
                 </div>
 
-                <button id="upload-btn" onclick="startUpload()" class="btn-primary">Upload Video</button>
-            </div>
+                <button type="button" id="upload-btn" onclick="startUpload()" class="btn-primary">Upload Video</button>
+            </form>
 
             <!-- Progress Bar UI Container -->
             <div id="progress-wrapper" class="progress-container hidden">
@@ -313,6 +342,15 @@
 
     </div>
 
+    <!-- Success Modal Pop-up -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-teal); font-size: 1.8rem; margin-bottom: 0.75rem;">Upload Successful!</h3>
+            <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Your video has been successfully uploaded and is sitting securely as <strong>Private</strong> for review.</p>
+            <button onclick="closeSuccessModal()" class="btn-primary" style="background-color: var(--brand-teal);">Got It</button>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
@@ -325,7 +363,6 @@
 
         const urlParams = new URLSearchParams(window.location.search);
 
-        // Check if backend returned success along with the user's email
         if (urlParams.get('linked') === 'success') {
             const loggedInEmail = urlParams.get('email');
             if (loggedInEmail) {
@@ -340,7 +377,6 @@
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
-        // Check if we have an active linked email stored locally
         const activeUserEmail = localStorage.getItem('yt_user_email');
         if (activeUserEmail) {
             document.getElementById('auth-section').classList.add('hidden');
@@ -356,10 +392,14 @@
             errBox.classList.remove('hidden');
         }
 
-        // Unlink account utility function
         function unlinkAccount() {
             localStorage.removeItem('yt_user_email');
-            location.href = window.location.pathname; // Reload clean page
+            location.href = window.location.pathname;
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         async function startUpload() {
@@ -371,7 +411,6 @@
 
             const file = fileInput.files[0];
 
-            // Validate file types against standard formats including game recordings
             const allowedTypes = ['video/mp4', 'video/quicktime', 'video/webm', 'video/x-matroska', 'video/avi'];
             if (!allowedTypes.includes(file.type)) {
                 alert("Unsupported file type. Please select a valid video format (MP4, MOV, WebM, MKV, or AVI).");
@@ -388,7 +427,6 @@
             const userTitle = document.getElementById('video-title').value;
             const userDesc = document.getElementById('video-desc').value;
             
-            // UI elements for progress tracking
             const uploadBtn = document.getElementById('upload-btn');
             const progressWrapper = document.getElementById('progress-wrapper');
             const statusText = document.getElementById('progress-status-text');
@@ -402,7 +440,6 @@
             progressBarFill.style.width = "0%";
 
             try {
-                // Step 1: Ask backend for the Resumable Session URL
                 const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
                     method: 'POST',
                     headers: { 
@@ -424,14 +461,12 @@
                 const uploadUrl = data.uploadUrl;
                 statusText.innerText = "Streaming video to YouTube...";
 
-                // Step 2: Stream file using XMLHttpRequest to track live upload percentage
                 await new Promise((resolve, reject) => {
                     const xhr = new XMLHttpRequest();
                     xhr.open('PUT', uploadUrl, true);
                     xhr.setRequestHeader('Content-Type', file.type);
                     xhr.setRequestHeader('X-Upload-Content-Length', file.size);
 
-                    // Track upload progress
                     xhr.upload.onprogress = (event) => {
                         if (event.lengthComputable) {
                             const percentComplete = Math.round((event.loaded / event.total) * 100);
@@ -453,10 +488,17 @@
                     xhr.send(file);
                 });
 
-                statusText.innerText = "Complete! Video uploaded and sitting as Private.";
-                percentageText.innerText = "100%";
-                progressBarFill.style.width = "100%";
+                // --- SUCCESS ACTIONS ---
+                // 1. Reset the upload form fields and file input
+                document.getElementById('upload-form').reset();
+
+                // 2. Hide progress wrapper & re-enable upload button
+                progressWrapper.classList.add('hidden');
                 uploadBtn.disabled = false;
+
+                // 3. Trigger the Success Pop-up Modal
+                document.getElementById('successModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
 
             } catch (err) {
                 console.error(err);
