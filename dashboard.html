@@ -58,51 +58,10 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            line-height: normal;
-            border: none;
-            font-family: inherit;
-            cursor: pointer;
             transition: opacity 0.2s ease;
         }
         .nav-btn:hover {
             opacity: 0.9;
-        }
-
-        /* Dropdown Styling */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--card-bg);
-            min-width: 170px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            z-index: 200;
-            overflow: hidden;
-            margin-top: 0.5rem;
-        }
-        .dropdown-menu.active {
-            display: block;
-        }
-        .dropdown-menu a {
-            color: var(--text-light);
-            padding: 0.75rem 1rem;
-            text-decoration: none;
-            display: block;
-            font-size: 0.9rem;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-        .dropdown-menu a:hover {
-            background-color: var(--bg-dark);
-            color: var(--brand-teal);
         }
 
         /* Main Container */
@@ -204,6 +163,35 @@
             color: var(--text-muted);
         }
 
+        /* Progress Bar Styling */
+        .progress-container {
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 14px;
+            background-color: #f1f5f9;
+            border-radius: 7px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--brand-teal), #238b91);
+            border-radius: 7px;
+            transition: width 0.2s ease;
+        }
+        .progress-text-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
         /* Call to Action Button */
         .btn-primary {
             display: inline-block;
@@ -222,6 +210,10 @@
         }
         .btn-primary:hover {
             opacity: 0.9;
+        }
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .hidden { display: none; }
@@ -256,16 +248,7 @@
         <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
             <a href="index.html" class="nav-btn">Home</a>
             <a href="dashboard.html" class="nav-btn">SUP</a>
-            
-            <!-- Legal Dropdown Button -->
-            <div class="dropdown">
-                <button class="nav-btn" id="legalDropdownBtn">Legal ▾</button>
-                <div class="dropdown-menu" id="legalDropdownMenu">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                </div>
-            </div>
-
+            <a href="privacy.html" class="nav-btn">Privacy Policy</a>
             <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
         </div>
     </header>
@@ -273,21 +256,27 @@
     <div class="container">
         
         <section class="hero">
-            <h1>SAFE <span class="highlight-teal">UPLOAD</span> <span class="highlight-red">PIPELINE</span></h1>
-            <p>Secure third-party YouTube uploading</p>
+            <h1>The Safe <span class="highlight-teal">Upload</span> <span class="highlight-red">Pipeline</span></h1>
+            <p>Secure third-party YouTube uploading.</p>
         </section>
 
         <!-- Auth Section Card -->
         <div id="auth-section" class="card">
             <h2>Link Account</h2>
             <p>To begin secure video uploading, you must link your YouTube account first.</p>
-            <a id="login-btn" href="#" class="btn-primary" style="max-width: 300px;">Link YouTube Account</a>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a id="login-btn" href="#" class="btn-primary" style="max-width: 300px;">Link YouTube Account</a>
+                <button onclick="unlinkAccount()" class="btn-primary" style="background-color: var(--navy-dark); max-width: 200px;">Unlink Account</button>
+            </div>
         </div>
 
         <!-- Upload Section Card -->
         <div id="upload-section" class="card hidden">
             <div id="status-message" class="success hidden">YouTube Account Linked Successfully!</div>
-            <h2>Upload a Video</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 style="margin-bottom: 0;">Upload a Video</h2>
+                <button onclick="unlinkAccount()" class="nav-btn" style="background-color: var(--navy-dark); font-size: 0.8rem; padding: 0.4rem 0.8rem;">Unlink YouTube</button>
+            </div>
             <p>Uploaded videos remain <strong>Private</strong> until changed by a parent or guardian.<br><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
             
             <div style="max-width: 500px; margin: 0 auto; text-align: left;">
@@ -302,13 +291,22 @@
                 </div>
 
                 <div class="file-input-wrapper">
-                    <input type="file" id="video-file" accept="video/*">
+                    <input type="file" id="video-file" accept="video/mp4,video/quicktime,video/webm,video/x-matroska,video/avi">
                 </div>
 
-                <button onclick="startUpload()" class="btn-primary">Upload Video</button>
+                <button id="upload-btn" onclick="startUpload()" class="btn-primary">Upload Video</button>
             </div>
 
-            <p id="upload-progress" style="margin-top: 1.5rem; font-weight: 600; color: var(--text-muted);"></p>
+            <!-- Progress Bar UI Container -->
+            <div id="progress-wrapper" class="progress-container hidden">
+                <div class="progress-text-row">
+                    <span id="progress-status-text">Preparing upload...</span>
+                    <span id="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                </div>
+            </div>
         </div>
 
         <div id="error-box" class="error hidden"></div>
@@ -333,7 +331,6 @@
             if (loggedInEmail) {
                 localStorage.setItem('yt_user_email', loggedInEmail.toLowerCase());
             }
-            // Clean up the URL bar to remove parameters
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
@@ -359,10 +356,25 @@
             errBox.classList.remove('hidden');
         }
 
+        // Unlink account utility function
+        function unlinkAccount() {
+            localStorage.removeItem('yt_user_email');
+            location.href = window.location.pathname; // Reload clean page
+        }
+
         async function startUpload() {
             const fileInput = document.getElementById('video-file');
             if (fileInput.files.length === 0) {
-                alert("Please choose a file first.");
+                alert("Please choose a video file first.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+
+            // Validate file types against standard formats including game recordings
+            const allowedTypes = ['video/mp4', 'video/quicktime', 'video/webm', 'video/x-matroska', 'video/avi'];
+            if (!allowedTypes.includes(file.type)) {
+                alert("Unsupported file type. Please select a valid video format (MP4, MOV, WebM, MKV, or AVI).");
                 return;
             }
 
@@ -373,15 +385,24 @@
                 return;
             }
 
-            const file = fileInput.files[0];
             const userTitle = document.getElementById('video-title').value;
             const userDesc = document.getElementById('video-desc').value;
             
-            const progress = document.getElementById('upload-progress');
-            progress.innerText = "Requesting upload session from backend...";
+            // UI elements for progress tracking
+            const uploadBtn = document.getElementById('upload-btn');
+            const progressWrapper = document.getElementById('progress-wrapper');
+            const statusText = document.getElementById('progress-status-text');
+            const percentageText = document.getElementById('progress-percentage');
+            const progressBarFill = document.getElementById('progress-bar-fill');
+
+            uploadBtn.disabled = true;
+            progressWrapper.classList.remove('hidden');
+            statusText.innerText = "Requesting upload session...";
+            percentageText.innerText = "0%";
+            progressBarFill.style.width = "0%";
 
             try {
-                // Step 1: Ask backend for the Resumable Session URL, passing the active user's email
+                // Step 1: Ask backend for the Resumable Session URL
                 const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
                     method: 'POST',
                     headers: { 
@@ -392,8 +413,8 @@
                         fileSize: file.size,
                         fileType: file.type,
                         title: userTitle || file.name,
-                        description: userDesc || "Pending verification video submission.",
-                        userEmail: userEmail // Dynamically passes the logged-in user email!
+                        description: userDesc || "Uploaded via ComShell Safe Upload Pipeline.",
+                        userEmail: userEmail
                     })
                 });
 
@@ -401,46 +422,49 @@
                 if (!res.ok) throw new Error(data.error || "Upload initialization failed.");
 
                 const uploadUrl = data.uploadUrl;
-                progress.innerText = "Streaming video directly to YouTube...";
+                statusText.innerText = "Streaming video to YouTube...";
 
-                // Step 2: Stream video file directly from browser to Google's servers
-                const uploadRes = await fetch(uploadUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': file.type,
-                        'X-Upload-Content-Length': file.size
-                    },
-                    body: file
+                // Step 2: Stream file using XMLHttpRequest to track live upload percentage
+                await new Promise((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('PUT', uploadUrl, true);
+                    xhr.setRequestHeader('Content-Type', file.type);
+                    xhr.setRequestHeader('X-Upload-Content-Length', file.size);
+
+                    // Track upload progress
+                    xhr.upload.onprogress = (event) => {
+                        if (event.lengthComputable) {
+                            const percentComplete = Math.round((event.loaded / event.total) * 100);
+                            percentageText.innerText = `${percentComplete}%`;
+                            progressBarFill.style.width = `${percentComplete}%`;
+                        }
+                    };
+
+                    xhr.onload = () => {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            resolve();
+                        } else {
+                            reject(new Error("Direct upload stream to Google failed."));
+                        }
+                    };
+
+                    xhr.onerror = () => reject(new Error("Network error occurred during upload."));
+                    
+                    xhr.send(file);
                 });
 
-                if (uploadRes.ok) {
-                    progress.innerText = "Success! Video uploaded and sitting as Private for verification.";
-                } else {
-                    throw new Error("Direct upload stream to Google failed.");
-                }
+                statusText.innerText = "Complete! Video uploaded and sitting as Private.";
+                percentageText.innerText = "100%";
+                progressBarFill.style.width = "100%";
+                uploadBtn.disabled = false;
 
             } catch (err) {
                 console.error(err);
                 showError(err.message);
-                progress.innerText = "";
+                statusText.innerText = "Upload failed.";
+                uploadBtn.disabled = false;
             }
         }
-
-        // Legal Dropdown Toggle Logic
-        const legalDropdownBtn = document.getElementById('legalDropdownBtn');
-        const legalDropdownMenu = document.getElementById('legalDropdownMenu');
-
-        legalDropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            legalDropdownMenu.classList.toggle('active');
-        });
-
-        // Close dropdown when clicking anywhere else on the page
-        document.addEventListener('click', (e) => {
-            if (!legalDropdownBtn.contains(e.target) && !legalDropdownMenu.contains(e.target)) {
-                legalDropdownMenu.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>
