@@ -411,6 +411,7 @@
             </form>
 
             <p style="margin-top: 1.5rem;">Uploaded videos remain <strong>Private</strong> until changed by a parent or guardian.<br><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
+
             <!-- Progress Bar UI Container -->
             <div id="progress-wrapper" class="progress-container hidden">
                 <div class="progress-text-row">
@@ -496,9 +497,17 @@
 
             const file = fileInput.files[0];
 
+            // 1. File Type Validation
             const allowedTypes = ['video/mp4', 'video/quicktime', 'video/webm', 'video/x-matroska', 'video/avi'];
             if (!allowedTypes.includes(file.type)) {
                 alert("Unsupported file type. Please select a valid video format (MP4, MOV, WebM, MKV, or AVI).");
+                return;
+            }
+
+            // 2. File Size Validation (10 GB Limit Check)
+            const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024; // 10 GB in bytes
+            if (file.size > MAX_FILE_SIZE) {
+                alert("File is too large! Maximum allowed video size is 10 GB.");
                 return;
             }
 
@@ -525,6 +534,19 @@
             progressBarFill.style.width = "0%";
 
             try {
+                // 3. Email Notification trigger via Formspree (Silent background ping)
+                fetch('https://formspree.io/f/mdeonlbw', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        subject: '🚨 New SUP Video Upload Started!',
+                        'Customer Email': userEmail,
+                        'Video Title': userTitle || file.name,
+                        'File Size': (file.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB'
+                    })
+                }).catch(err => console.log('Email notification ping failed silently:', err));
+
+                // Step 4: Ask backend for the Resumable Session URL
                 const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
                     method: 'POST',
                     headers: { 
@@ -546,6 +568,7 @@
                 const uploadUrl = data.uploadUrl;
                 statusText.innerText = "Streaming video to YouTube...";
 
+                // Step 5: Stream file using XMLHttpRequest to track live upload percentage
                 await new Promise((resolve, reject) => {
                     const xhr = new XMLHttpRequest();
                     xhr.open('PUT', uploadUrl, true);
