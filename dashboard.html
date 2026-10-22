@@ -289,7 +289,7 @@
         .hidden { display: none; }
         .error { color: #dc2626; font-weight: bold; background: #fee2e2; padding: 1rem; border-radius: 8px; margin-top: 15px; border: 1px solid #fca5a5; }
         
-        /* Centered Stacked Success Bar Container */
+        /* Centered, Narrower Stacked Success Bar Container */
         .success-bar {
             display: flex;
             flex-direction: column;
@@ -300,7 +300,8 @@
             font-weight: bold;
             padding: 1.25rem;
             border-radius: 8px;
-            margin-bottom: 2rem;
+            margin: 0 auto 2rem auto;
+            max-width: 420px;
             border: 1px solid #86efac;
             gap: 0.85rem;
         }
@@ -375,21 +376,22 @@
 
         <!-- Auth Section Card (Before Account is Linked) -->
         <div id="auth-section" class="card">
-            <h2>YOUTUBE LINK</h2>
-            <p>To begin uploading, please link your YouTube account first.</p>
+            <h2>Link Account</h2>
+            <p>To begin secure video uploading, you must link your YouTube account first.</p>
             <div style="display: flex; justify-content: center;">
-                <a id="login-btn" href="#" class="btn-primary" style="max-width: 300px;">Click Here</a>
+                <a id="login-btn" href="#" class="btn-primary" style="max-width: 300px;">Link YouTube Account</a>
             </div>
-            <p style="margin-top: 1.5rem;"><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
         </div>
 
         <!-- Upload Section Card (After Account is Linked) -->
         <div id="upload-section" class="card hidden">
             <!-- Centered Stacked Success Bar with Unlink Button Below -->
             <div id="status-message" class="success-bar hidden">
-                <span>YouTube Account Linked Successfully!</span>
+                <span>YouTube Linked!</span>
                 <button onclick="unlinkAccount()" class="nav-btn" style="background-color: var(--navy-dark); font-size: 0.85rem; padding: 0.5rem 1.25rem;">Unlink YouTube</button>
             </div>
+
+            <h2>Upload a Video</h2>
             
             <form id="upload-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
                 <div class="form-group">
@@ -410,7 +412,6 @@
             </form>
 
             <p style="margin-top: 1.5rem;">Uploaded videos remain <strong>Private</strong> until changed by a parent or guardian.<br><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
-
             <!-- Progress Bar UI Container -->
             <div id="progress-wrapper" class="progress-container hidden">
                 <div class="progress-text-row">
@@ -496,17 +497,15 @@
 
             const file = fileInput.files[0];
 
-            // 1. File Type Validation
             const allowedTypes = ['video/mp4', 'video/quicktime', 'video/webm', 'video/x-matroska', 'video/avi'];
             if (!allowedTypes.includes(file.type)) {
                 alert("Unsupported file type. Please select a valid video format (MP4, MOV, WebM, MKV, or AVI).");
                 return;
             }
 
-            // 2. File Size Validation (10 GB Limit Check)
             const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024; // 10 GB in bytes
             if (file.size > MAX_FILE_SIZE) {
-                alert("File is too large! Maximum 10 GB.");
+                alert("File is too large! Maximum allowed video size is 10 GB.");
                 return;
             }
 
@@ -533,18 +532,17 @@
             progressBarFill.style.width = "0%";
 
             try {
-                // 3. Email Notification trigger via Formspree (Silent background ping)
                 fetch('https://formspree.io/f/mdeonlbw', {
                     method: 'POST',
                     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        subject: 'SUP Activated',
+                        subject: '💡 New SUP Video Upload Started!',
                         'Customer Email': userEmail,
+                        'Video Title': userTitle || file.name,
                         'File Size': (file.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB'
                     })
                 }).catch(err => console.log('Email notification ping failed silently:', err));
 
-                // Step 4: Ask backend for the Resumable Session URL
                 const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
                     method: 'POST',
                     headers: { 
@@ -566,7 +564,6 @@
                 const uploadUrl = data.uploadUrl;
                 statusText.innerText = "Streaming video to YouTube...";
 
-                // Step 5: Stream file using XMLHttpRequest to track live upload percentage
                 await new Promise((resolve, reject) => {
                     const xhr = new XMLHttpRequest();
                     xhr.open('PUT', uploadUrl, true);
