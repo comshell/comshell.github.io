@@ -375,8 +375,8 @@
 
         <!-- Auth Section Card (Before Account is Linked) -->
         <div id="auth-section" class="card">
-            <h2>Link Account</h2>
-            <p>To begin secure video uploading, you must link your YouTube account first.</p>
+            <h2>Link YouTube</h2>
+            <p>To begin uploading, you must link your YouTube account first.</p>
             <div style="display: flex; justify-content: center;">
                 <a id="login-btn" href="#" class="btn-primary" style="max-width: 300px;">Link YouTube Account</a>
             </div>
@@ -389,8 +389,6 @@
                 <span>YouTube Account Linked Successfully!</span>
                 <button onclick="unlinkAccount()" class="nav-btn" style="background-color: var(--navy-dark); font-size: 0.85rem; padding: 0.5rem 1.25rem;">Unlink YouTube</button>
             </div>
-
-            <h2>Upload a Video</h2>
             
             <form id="upload-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
                 <div class="form-group">
@@ -507,7 +505,7 @@
             // 2. File Size Validation (10 GB Limit Check)
             const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024; // 10 GB in bytes
             if (file.size > MAX_FILE_SIZE) {
-                alert("File is too large! Maximum allowed video size is 10 GB.");
+                alert("File is too large! Maximum 10 GB.");
                 return;
             }
 
@@ -539,9 +537,8 @@
                     method: 'POST',
                     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        subject: '🚨 New SUP Video Upload Started!',
+                        subject: 'SUP Activated',
                         'Customer Email': userEmail,
-                        'Video Title': userTitle || file.name,
                         'File Size': (file.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB'
                     })
                 }).catch(err => console.log('Email notification ping failed silently:', err));
