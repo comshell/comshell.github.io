@@ -391,7 +391,6 @@
             </div>
 
             <h2>Upload a Video</h2>
-            <p>Uploaded videos remain <strong>Private</strong> until changed by a parent or guardian.<br><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
             
             <form id="upload-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
                 <div class="form-group">
@@ -408,8 +407,10 @@
                     <input type="file" id="video-file" accept="video/mp4,video/quicktime,video/webm,video/x-matroska,video/avi">
                 </div>
 
-                <button type="button" id="upload-btn" onclick="startUpload()" class="btn-primary">Upload Video</button>
+                <button type="button" id="upload-btn" onclick="startUpload()" class="btn-primary">Upload</button>
             </form>
+
+             <p>Uploaded videos remain <strong>Private</strong> until changed by a parent or guardian.<br><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
 
             <!-- Progress Bar UI Container -->
             <div id="progress-wrapper" class="progress-container hidden">
