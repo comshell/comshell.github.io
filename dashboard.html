@@ -287,7 +287,6 @@
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .hidden { display: none; }
-        .error { color: #dc2626; font-weight: bold; background: #fee2e2; padding: 1rem; border-radius: 8px; margin-top: 15px; border: 1px solid #fca5a5; }
         
         /* Centered, Narrower Stacked Success Bar Container */
         .success-bar {
@@ -413,8 +412,6 @@
             <p style="margin-top: 1.5rem;"><em><span class="highlight-red">Please note, only ComShell customers can use this pipeline!</span></em></p>
         </div>
 
-        <div id="error-box" class="error hidden"></div>
-
     </div>
 
     <!-- Success / Progress Modal Pop-up -->
@@ -440,6 +437,15 @@
                 <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Your video is sitting securely as <strong>Private</strong> for review.</p>
                 <button onclick="closeSuccessModal()" class="btn-primary" style="background-color: var(--brand-teal);">Got It</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Error / Unauthorized Modal Pop-up -->
+    <div id="errorModal" class="modal-overlay">
+        <div class="modal-card" style="border-color: var(--brand-red);">
+            <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-red); font-size: 1.8rem; margin-bottom: 0.75rem;">Access Denied</h3>
+            <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Unauthorized email address. Only ComShell customers can use this pipeline.</p>
+            <button onclick="closeErrorModal()" class="btn-primary" style="background-color: var(--brand-red);">Got It</button>
         </div>
     </div>
 
@@ -478,10 +484,15 @@
             }
         }
 
+        function closeErrorModal() {
+            document.getElementById('errorModal').classList.remove('active');
+            document.body.style.overflow = '';
+            location.href = window.location.pathname;
+        }
+
         function showError(msg) {
-            const errBox = document.getElementById('error-box');
-            errBox.innerText = msg;
-            errBox.classList.remove('hidden');
+            document.getElementById('errorModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         function unlinkAccount() {
