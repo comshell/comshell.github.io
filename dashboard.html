@@ -464,7 +464,7 @@
 
         if (urlParams.get('error')) {
             localStorage.removeItem('yt_user_email');
-            showError("Connection expired or unauthorized. Please tap 'Link YouTube Account' again.");
+            showError("Unauthorized. Please try again.");
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
