@@ -204,7 +204,7 @@
             color: var(--text-muted);
         }
 
-        /* Progress Bar Styling */
+        /* Progress Bar Styling inside Modal */
         .progress-container {
             margin-top: 1.5rem;
             text-align: left;
@@ -233,7 +233,7 @@
             color: var(--text-muted);
         }
 
-        /* Modal Overlay for Success Pop-up */
+        /* Modal Overlay for Pop-ups */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -410,28 +410,35 @@
             </form>
 
             <p style="margin-top: 1.5rem;">Uploaded videos remain <strong>Private</strong> until changed by a parent or guardian.<br><em><span class="highlight-red">Please note, only ComShell customers can use the pipeline!</span></em></p>
-            <!-- Progress Bar UI Container -->
-            <div id="progress-wrapper" class="progress-container hidden">
-                <div class="progress-text-row">
-                    <span id="progress-status-text">Preparing upload...</span>
-                    <span id="progress-percentage">0%</span>
-                </div>
-                <div class="progress-bar-bg">
-                    <div id="progress-bar-fill" class="progress-bar-fill"></div>
-                </div>
-            </div>
         </div>
 
         <div id="error-box" class="error hidden"></div>
 
     </div>
 
-    <!-- Success Modal Pop-up -->
+    <!-- Success / Progress Modal Pop-up -->
     <div id="successModal" class="modal-overlay">
         <div class="modal-card">
-            <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-teal); font-size: 1.8rem; margin-bottom: 0.75rem;">Upload Successful!</h3>
-            <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Your video has been successfully uploaded and is sitting securely as <strong>Private</strong> for review.</p>
-            <button onclick="closeSuccessModal()" class="btn-primary" style="background-color: var(--brand-teal);">Got It</button>
+            <!-- Progress View State -->
+            <div id="modal-progress-view">
+                <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--text-light); font-size: 1.8rem; margin-bottom: 1rem;">Uploading Video...</h3>
+                <div class="progress-container" style="margin-top: 0;">
+                    <div class="progress-text-row">
+                        <span id="progress-status-text">Preparing upload...</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success View State (Preserved exactly as requested) -->
+            <div id="modal-success-view" class="hidden">
+                <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-teal); font-size: 1.8rem; margin-bottom: 0.75rem;">Upload Successful!</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Your video has been successfully uploaded and is sitting securely as <strong>Private</strong> for review.</p>
+                <button onclick="closeSuccessModal()" class="btn-primary" style="background-color: var(--brand-teal);">Got It</button>
+            </div>
         </div>
     </div>
 
@@ -484,6 +491,7 @@
         function closeSuccessModal() {
             document.getElementById('successModal').classList.remove('active');
             document.body.style.overflow = '';
+            location.reload(); // Refresh to clear state cleanly for the next upload
         }
 
         async function startUpload() {
@@ -518,13 +526,20 @@
             const userDesc = document.getElementById('video-desc').value;
             
             const uploadBtn = document.getElementById('upload-btn');
-            const progressWrapper = document.getElementById('progress-wrapper');
+            const modalProgressView = document.getElementById('modal-progress-view');
+            const modalSuccessView = document.getElementById('modal-success-view');
             const statusText = document.getElementById('progress-status-text');
             const percentageText = document.getElementById('progress-percentage');
             const progressBarFill = document.getElementById('progress-bar-fill');
 
             uploadBtn.disabled = true;
-            progressWrapper.classList.remove('hidden');
+
+            // Show modal with progress view active
+            modalProgressView.classList.remove('hidden');
+            modalSuccessView.classList.add('hidden');
+            document.getElementById('successModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+
             statusText.innerText = "Requesting upload session...";
             percentageText.innerText = "0%";
             progressBarFill.style.width = "0%";
@@ -591,19 +606,17 @@
 
                 // Reset form fields
                 document.getElementById('upload-form').reset();
-
-                // Hide progress wrapper & re-enable upload button
-                progressWrapper.classList.add('hidden');
                 uploadBtn.disabled = false;
 
-                // Trigger Success Modal
-                document.getElementById('successModal').classList.add('active');
-                document.body.style.overflow = 'hidden';
+                // Switch modal contents seamlessly to success view
+                modalProgressView.classList.add('hidden');
+                modalSuccessView.classList.remove('hidden');
 
             } catch (err) {
                 console.error(err);
+                document.getElementById('successModal').classList.remove('active');
+                document.body.style.overflow = '';
                 showError(err.message);
-                statusText.innerText = "Upload failed.";
                 uploadBtn.disabled = false;
             }
         }
