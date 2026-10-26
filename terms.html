@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ComShell | Terms of Service</title>
+    <title>ComShell | Safe Upload Pipeline</title> 
+    <!-- Google Font: Oswald -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
@@ -11,23 +12,44 @@
         :root {
             --brand-teal: #2aa6ad;
             --brand-red: #d9383a;
-            --bg-dark: #edf6f7;
-            --card-bg: #ffffff;
-            --navy-dark: #0f172a;
-            --border-color: #e2e8f0;
-            --text-light: #0f172a;
-            --text-muted: #475569;
+            --bg-dark: #edf6f7;        /* Soft pastel slate background */
+            --card-bg: #ffffff;        /* Crisp white for central cards */
+            --navy-dark: #0f172a;      /* Rich navy for Header */
+            --border-color: #e2e8f0;    /* Light borders */
+            --text-light: #0f172a;     /* Dark text for white areas */
+            --text-muted: #475569;     /* Subtext for white areas */
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: system-ui, -apple-system, sans-serif; background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation Header - Rich Dark Navy Frame matching index.html */
         header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 2rem; background-color: var(--navy-dark); border-bottom: 1px solid #1e293b;
-            position: sticky; top: 0; z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--navy-dark);
+            border-bottom: 1px solid #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .logo { height: 40px; width: auto; display: block; }
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
         .nav-btn {
             background-color: var(--brand-teal);
             color: #ffffff;
@@ -45,7 +67,9 @@
             cursor: pointer;
             transition: opacity 0.2s ease;
         }
-        .nav-btn:hover { opacity: 0.9; }
+        .nav-btn:hover {
+            opacity: 0.9;
+        }
 
         /* Dropdown Styling */
         .dropdown {
@@ -81,36 +105,217 @@
             color: var(--brand-teal);
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem 1.5rem; }
-        
-        .hero { text-align: center; padding: 1.5rem 0 1rem 0; }
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 3rem 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 1.5rem 0 1rem 0;
+        }
         h1 {
-            color: var(--text-light); 
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-family: 'Oswald', sans-serif; 
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            color: var(--text-light);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
-        .highlight-teal { color: var(--brand-teal); }
-        .highlight-red { color: var(--brand-red); }
+        .highlight-teal {
+            color: var(--brand-teal);
+        }
+        .highlight-red {
+            color: var(--brand-red);
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
+        /* Central Card Component */
         .card {
-            background: var(--card-bg); border: 2px solid var(--brand-teal);
-            border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
-            margin: 1.5rem 0 2rem 0; text-align: left;
+            background: var(--card-bg);
+            border: 2px solid var(--brand-teal);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+            margin: 1.5rem 0 2rem 0;
+            text-align: center;
         }
+        
         .card h2 {
-            font-family: 'Oswald', sans-serif; text-transform: uppercase;
-            font-size: 1.3rem; color: var(--text-light); margin-top: 1.5rem; margin-bottom: 0.5rem;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 2rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
         }
-        .card p, .card ul { color: var(--text-muted); margin-bottom: 1rem; font-size: 1rem; }
-        .card ul { margin-left: 1.5rem; }
-        .card li { margin-bottom: 0.5rem; }
-        .card a { color: var(--brand-teal); text-decoration: none; font-weight: 600; }
+        .card p {
+            color: var(--text-muted);
+            margin: 0 auto 1.5rem auto;
+            max-width: 750px;
+        }
 
-        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border-color); margin-top: 3rem; }
+        /* Form Group Styles */
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--brand-teal);
+            background: #ffffff;
+        }
 
-        /* Mobile Optimization */
+        .file-input-wrapper {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .file-input-wrapper input[type="file"] {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Progress Bar Styling inside Modal */
+        .progress-container {
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 14px;
+            background-color: #f1f5f9;
+            border-radius: 7px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--brand-teal), #238b91);
+            border-radius: 7px;
+            transition: width 0.2s ease;
+        }
+        .progress-text-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Modal Overlay for Pop-ups */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-card {
+            background: var(--card-bg);
+            border: 2px solid var(--brand-teal);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.25s ease-out;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Call to Action Button */
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--brand-red);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            width: 100%;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .hidden { display: none; }
+        
+        /* Centered, Narrower Stacked Success Bar Container */
+        .success-bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: #dcfce7;
+            color: #16a34a;
+            font-weight: bold;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 0 auto 2rem auto;
+            max-width: 420px;
+            border: 1px solid #86efac;
+            gap: 0.85rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        /* Mobile Optimization matching index.html */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -132,7 +337,9 @@
                 padding: 0.5rem 0.75rem;
                 font-size: 0.85rem;
             }
-            .logo { height: 36px; }
+            .logo {
+                height: 36px;
+            }
         }
     </style>
 </head>
@@ -146,7 +353,7 @@
             <a href="index.html" class="nav-btn">Home</a>
             <a href="dashboard.html" class="nav-btn">SUP</a>
             
-            <!-- Legal Dropdown Button -->
+            <!-- Legal Dropdown Button matching index.html -->
             <div class="dropdown">
                 <button class="nav-btn" id="legalDropdownBtn">Legal ▾</button>
                 <div class="dropdown-menu" id="legalDropdownMenu">
@@ -158,34 +365,99 @@
             <a href="mailto:info@comshell.co.uk?subject=Inquiry" class="nav-btn">Contact Us</a>
         </div>
     </header>
-
+    
     <div class="container">
+        
         <section class="hero">
-            <h1><span class="highlight-teal">Terms</span> of <span class="highlight-red">Service</span></h1>
-            <p>Last updated: October 2026</p>
+            <h1>SAFE <span class="highlight-teal">UPLOAD</span> <span class="highlight-red">PIPELINE</span></h1>
+            <p>Secure third-party YouTube uploading</p>
         </section>
 
-        <div class="card">
-            <h2>1. Agreement to Terms</h2>
-            <p>By accessing or using ComShell and our Safe Upload Pipeline, you agree to be bound by these Terms of Service. If you do not agree to all terms, you may not use our service.</p>
+        <!-- Auth Section Card (Before Account is Linked) -->
+        <div id="auth-section" class="card">
+            <h2>YOUTUBE LINK</h2>
+            <p>To begin secure uploading, please link your YouTube account first.</p>
+            <div style="display: flex; justify-content: center;">
+                <a id="login-btn" href="#" class="btn-primary" style="max-width: 300px;">Click Here</a>
+            </div>
+            <p style="margin-top: 1.5rem;"><em><span class="highlight-red">Please note, only ComShell customers can use this pipeline!</span></em></p>
+        </div>
 
-            <h2>2. Description of Service</h2>
-            <p>ComShell provides digital tools, channel management setup and a Safe Upload Pipeline designed to assist parents and young creators in securely uploading video content to YouTube. All video uploads executed through ComShell default to "Private" visibility settings.</p>
+        <!-- Upload Section Card (After Account is Linked) -->
+        <div id="upload-section" class="card hidden">
+            <!-- Centered Stacked Success Bar with Unlink Button Below -->
+            <div id="status-message" class="success-bar hidden">
+                <span>YouTube Linked!</span>
+                <button onclick="confirmUnlink()" class="nav-btn" style="background-color: var(--navy-dark); font-size: 0.85rem; padding: 0.5rem 1.25rem;">Unlink YouTube</button>
+            </div>
+            
+            <form id="upload-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
+                <div class="form-group">
+                    <label for="video-title">Title</label>
+                    <input type="text" id="video-title" placeholder="Give your video a title">
+                </div>
+                
+                <div class="form-group">
+                    <label for="video-desc">Description</label>
+                    <textarea id="video-desc" placeholder="Write a description for your video" rows="3"></textarea>
+                </div>
 
-            <h2>3. Account Eligibility & Authorization</h2>
-            <p>Use of the Safe Upload Pipeline is restricted to authorized ComShell customers. You represent and warrant that you are a parent or guardian, or are operating with explicit parental authorization, when linking YouTube channels and uploading content.</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="video-file" accept="video/mp4,video/quicktime,video/webm,video/x-matroska,video/avi">
+                </div>
 
-            <h2>4. Acceptable Content & Compliance</h2>
-            <p>Users must comply with all YouTube Terms of Service and Community Guidelines. ComShell does not tolerate the uploading of unlawful, harmful, defamatory or abusive content. Users retain full responsibility for all content transmitted through the service.</p>
+                <button type="button" id="upload-btn" onclick="startUpload()" class="btn-primary">Upload</button>
+            </form>
 
-            <h2>5. Intellectual Property</h2>
-            <p>You retain full ownership of all original video content submitted via our platform. ComShell does not claim ownership or rights over your video assets or YouTube channel.</p>
+            <p style="margin-top: 1.5rem;"><em><span class="highlight-red">Please note, only ComShell customers can use this pipeline!</span></em></p>
+        </div>
 
-            <h2>6. Limitation of Liability</h2>
-            <p>ComShell is provided on an "as is" and "as available" basis. While we employ strict security measures and privacy shields, ComShell shall not be liable for indirect, incidental, or consequential damages resulting from the use or inability to use our services or third-party platform changes.</p>
+    </div>
 
-            <h2>7. Contact Us</h2>
-            <p>For any questions regarding these Terms of Service, please reach out to us at: <a href="mailto:info@comshell.co.uk">info@comshell.co.uk</a></p>
+    <!-- Success / Progress Modal Pop-up -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-card">
+            <!-- Progress View State -->
+            <div id="modal-progress-view">
+                <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--text-light); font-size: 1.8rem; margin-bottom: 1rem;">Uploading Video...</h3>
+                <div class="progress-container" style="margin-top: 0;">
+                    <div class="progress-text-row">
+                        <span id="progress-status-text">Preparing upload...</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success View State -->
+            <div id="modal-success-view" class="hidden">
+                <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-teal); font-size: 1.8rem; margin-bottom: 0.75rem;">Upload Successful!</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Your video is sitting securely as <strong>Private</strong> for review.</p>
+                <button onclick="closeSuccessModal()" class="btn-primary" style="background-color: var(--brand-teal);">Got It</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error / Unauthorized Modal Pop-up -->
+    <div id="errorModal" class="modal-overlay">
+        <div class="modal-card" style="border-color: var(--brand-red);">
+            <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-red); font-size: 1.8rem; margin-bottom: 0.75rem;">Access Denied</h3>
+            <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Unauthorized email address. Only ComShell customers can use this pipeline.</p>
+            <button onclick="closeErrorModal()" class="btn-primary" style="background-color: var(--brand-red);">Got It</button>
+        </div>
+    </div>
+
+    <!-- Unlink Confirmation Modal Pop-up -->
+    <div id="unlinkModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--text-light); font-size: 1.8rem; margin-bottom: 0.75rem;">Are you sure?</h3>
+            <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Only the account holder can relink to YouTube.</p>
+            <div style="display: flex; gap: 1rem;">
+                <button onclick="executeUnlink()" class="btn-primary" style="background-color: var(--brand-red); flex: 1;">Yes</button>
+                <button onclick="closeUnlinkModal()" class="btn-primary" style="background-color: var(--brand-teal); flex: 1;">No</button>
+            </div>
         </div>
     </div>
 
@@ -193,8 +465,207 @@
         <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
 
-    <script>
-        // Legal Dropdown Toggle Logic
+  <script>
+        const BACKEND_URL = "https://youtube-backend-oi2l.onrender.com";
+
+        // Point the login button directly to your backend OAuth route
+        document.getElementById('login-btn').href = `${BACKEND_URL}/auth/google`;
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (urlParams.get('linked') === 'success') {
+            const loggedInEmail = urlParams.get('email');
+            if (loggedInEmail) {
+                localStorage.setItem('yt_user_email', loggedInEmail.toLowerCase());
+            }
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        if (urlParams.get('error')) {
+            localStorage.removeItem('yt_user_email');
+            showError("Unauthorized. Please try again.");
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        const activeUserEmail = localStorage.getItem('yt_user_email');
+        if (activeUserEmail) {
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('upload-section').classList.remove('hidden');
+            if (urlParams.get('linked') === 'success') {
+                document.getElementById('status-message').classList.remove('hidden');
+            }
+        }
+
+        function closeErrorModal() {
+            document.getElementById('errorModal').classList.remove('active');
+            document.body.style.overflow = '';
+            location.href = window.location.pathname;
+        }
+
+        function showError(msg) {
+            document.getElementById('errorModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function confirmUnlink() {
+            document.getElementById('unlinkModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeUnlinkModal() {
+            document.getElementById('unlinkModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function executeUnlink() {
+            localStorage.removeItem('yt_user_email');
+            location.href = window.location.pathname;
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            document.body.style.overflow = '';
+            location.reload(); // Refresh to clear state cleanly for the next upload
+        }
+
+        async function startUpload() {
+            const fileInput = document.getElementById('video-file');
+            if (fileInput.files.length === 0) {
+                alert("Please choose a video file first.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+
+            const allowedTypes = ['video/mp4', 'video/quicktime', 'video/webm', 'video/x-matroska', 'video/avi'];
+            if (!allowedTypes.includes(file.type)) {
+                alert("Unsupported file type. Please select a valid video format (MP4, MOV, WebM, MKV, or AVI).");
+                return;
+            }
+
+            const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024; // 10 GB in bytes
+            if (file.size > MAX_FILE_SIZE) {
+                alert("File is too large! Maximum allowed video size is 10 GB.");
+                return;
+            }
+
+            const userEmail = localStorage.getItem('yt_user_email');
+            if (!userEmail) {
+                alert("Session expired. Please link your YouTube account again.");
+                location.reload();
+                return;
+            }
+
+            const userTitle = document.getElementById('video-title').value;
+            const userDesc = document.getElementById('video-desc').value;
+            
+            const uploadBtn = document.getElementById('upload-btn');
+            const modalProgressView = document.getElementById('modal-progress-view');
+            const modalSuccessView = document.getElementById('modal-success-view');
+            const statusText = document.getElementById('progress-status-text');
+            const percentageText = document.getElementById('progress-percentage');
+            const progressBarFill = document.getElementById('progress-bar-fill');
+
+            uploadBtn.disabled = true;
+
+            // Show modal with progress view active
+            modalProgressView.classList.remove('hidden');
+            modalSuccessView.classList.add('hidden');
+            document.getElementById('successModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            statusText.innerText = "Requesting upload session...";
+            percentageText.innerText = "0%";
+            progressBarFill.style.width = "0%";
+
+            try {
+                fetch('https://formspree.io/f/mdeonlbw', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        subject: '💡!SUP Activated!💡',
+                        'Customer Email': userEmail,
+                        'File Size': (file.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB'
+                    })
+                }).catch(err => console.log('Email notification ping failed silently:', err));
+
+                const res = await fetch(`${BACKEND_URL}/api/initiate-upload`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Origin-Header': window.location.origin
+                    },
+                    body: JSON.stringify({
+                        fileSize: file.size,
+                        fileType: file.type,
+                        title: userTitle || file.name,
+                        description: userDesc || "Uploaded via ComShell Safe Upload Pipeline.",
+                        userEmail: userEmail
+                    })
+                });
+
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || "Upload initialization failed.");
+
+                const uploadUrl = data.uploadUrl;
+                statusText.innerText = "Streaming video to YouTube...";
+
+                await new Promise((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('PUT', uploadUrl, true);
+                    xhr.setRequestHeader('Content-Type', file.type);
+                    xhr.setRequestHeader('X-Upload-Content-Length', file.size);
+
+                    xhr.upload.onprogress = (event) => {
+                        if (event.lengthComputable) {
+                            const percentComplete = Math.round((event.loaded / event.total) * 100);
+                            percentageText.innerText = `${percentComplete}%`;
+                            progressBarFill.style.width = `${percentComplete}%`;
+                        }
+                    };
+
+                    xhr.onload = () => {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            resolve();
+                        } else {
+                            reject(new Error("Direct upload stream to Google failed."));
+                        }
+                    };
+
+                    xhr.onerror = () => reject(new Error("Network error occurred during upload."));
+                    
+                    xhr.send(file);
+                });
+
+                // --- NOTIFY BACKEND TO SEND SUCCESS EMAIL TO USER ---
+                fetch(`${BACKEND_URL}/api/upload-complete`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userEmail: userEmail,
+                        title: userTitle || file.name
+                    })
+                }).catch(err => console.log('Success email notification failed:', err));
+                // ----------------------------------------------------
+
+                // Reset form fields
+                document.getElementById('upload-form').reset();
+                uploadBtn.disabled = false;
+
+                // Switch modal contents seamlessly to success view
+                modalProgressView.classList.add('hidden');
+                modalSuccessView.classList.remove('hidden');
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('successModal').classList.remove('active');
+                document.body.style.overflow = '';
+                showError(err.message);
+                uploadBtn.disabled = false;
+            }
+        }
+
+        // Legal Dropdown Toggle Logic matching index.html
         const legalDropdownBtn = document.getElementById('legalDropdownBtn');
         const legalDropdownMenu = document.getElementById('legalDropdownMenu');
 
@@ -203,13 +674,11 @@
             legalDropdownMenu.classList.toggle('active');
         });
 
-        // Close dropdown when clicking anywhere else on the page
         document.addEventListener('click', (e) => {
             if (!legalDropdownBtn.contains(e.target) && !legalDropdownMenu.contains(e.target)) {
                 legalDropdownMenu.classList.remove('active');
             }
         });
     </script>
-
 </body>
 </html>
