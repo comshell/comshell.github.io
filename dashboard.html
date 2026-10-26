@@ -453,7 +453,7 @@
         <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
 
-    <script>
+  <script>
         const BACKEND_URL = "https://youtube-backend-oi2l.onrender.com";
 
         // Point the login button directly to your backend OAuth route
@@ -614,6 +614,17 @@
                     
                     xhr.send(file);
                 });
+
+                // --- NOTIFY BACKEND TO SEND SUCCESS EMAIL TO USER ---
+                fetch(`${BACKEND_URL}/api/upload-complete`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userEmail: userEmail,
+                        title: userTitle || file.name
+                    })
+                }).catch(err => console.log('Success email notification failed:', err));
+                // ----------------------------------------------------
 
                 // Reset form fields
                 document.getElementById('upload-form').reset();
