@@ -388,7 +388,7 @@
             <!-- Centered Stacked Success Bar with Unlink Button Below -->
             <div id="status-message" class="success-bar hidden">
                 <span>YouTube Linked!</span>
-                <button onclick="unlinkAccount()" class="nav-btn" style="background-color: var(--navy-dark); font-size: 0.85rem; padding: 0.5rem 1.25rem;">Unlink YouTube</button>
+                <button onclick="confirmUnlink()" class="nav-btn" style="background-color: var(--navy-dark); font-size: 0.85rem; padding: 0.5rem 1.25rem;">Unlink YouTube</button>
             </div>
             
             <form id="upload-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
@@ -449,6 +449,18 @@
         </div>
     </div>
 
+    <!-- Unlink Confirmation Modal Pop-up -->
+    <div id="unlinkModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--text-light); font-size: 1.8rem; margin-bottom: 0.75rem;">Are you sure?</h3>
+            <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Only the account holder can relink to YouTube.</p>
+            <div style="display: flex; gap: 1rem;">
+                <button onclick="executeUnlink()" class="btn-primary" style="background-color: var(--brand-red); flex: 1;">Yes</button>
+                <button onclick="closeUnlinkModal()" class="btn-primary" style="background-color: var(--brand-teal); flex: 1;">No</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
@@ -495,7 +507,17 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function unlinkAccount() {
+        function confirmUnlink() {
+            document.getElementById('unlinkModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeUnlinkModal() {
+            document.getElementById('unlinkModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function executeUnlink() {
             localStorage.removeItem('yt_user_email');
             location.href = window.location.pathname;
         }
