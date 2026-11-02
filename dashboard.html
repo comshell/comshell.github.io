@@ -440,7 +440,7 @@
         </div>
     </div>
 
-   <!-- Error / Unauthorized Modal Pop-up -->
+    <!-- Access Denied Modal Pop-up (For unauthorized login emails) -->
     <div id="errorModal" class="modal-overlay">
         <div class="modal-card" style="border-color: var(--brand-red);">
             <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-red); font-size: 1.8rem; margin-bottom: 0.75rem;">Access Denied</h3>
@@ -449,7 +449,7 @@
         </div>
     </div>
 
-    <!-- Upload Failed Modal Pop-up -->
+    <!-- Upload Failed Modal Pop-up (For broken or cancelled file transfers) -->
     <div id="uploadFailedModal" class="modal-overlay">
         <div class="modal-card" style="border-color: var(--brand-red);">
             <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-red); font-size: 1.8rem; margin-bottom: 0.75rem;">UPLOAD FAILED</h3>
@@ -480,7 +480,7 @@
 
         if (urlParams.get('error')) {
             localStorage.removeItem('yt_user_email');
-            showError("Unauthorized. Please try again.");
+            showAccessDeniedError();
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
@@ -493,15 +493,20 @@
             }
         }
 
-        function closeErrorModal() {
-            document.getElementById('errorModal').classList.remove('active');
-            document.body.style.overflow = '';
-            location.href = window.location.pathname;
-        }
-
-        function showError(msg) {
+        function showAccessDeniedError() {
             document.getElementById('errorModal').classList.add('active');
             document.body.style.overflow = 'hidden';
+        }
+
+        function showUploadFailedError() {
+            document.getElementById('uploadFailedModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeErrorModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = '';
+            location.href = window.location.pathname;
         }
 
         function unlinkAccount() {
@@ -661,7 +666,7 @@
                 console.error(err);
                 document.getElementById('successModal').classList.remove('active');
                 document.body.style.overflow = '';
-                showError(err.message);
+                showUploadFailedError();
                 uploadBtn.disabled = false;
             }
         }
