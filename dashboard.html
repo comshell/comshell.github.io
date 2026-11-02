@@ -119,10 +119,7 @@
         }
         h1 {
             color: var(--text-light);
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-family: 'Oswald', sans-serif;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
             margin-bottom: 0.5rem;
             line-height: 1.2;
         }
@@ -391,7 +388,7 @@
             <!-- Centered Stacked Success Bar with Unlink Button Below -->
             <div id="status-message" class="success-bar hidden">
                 <span>YouTube Linked!</span>
-                <button onclick="confirmUnlink()" class="nav-btn" style="background-color: var(--navy-dark); font-size: 0.85rem; padding: 0.5rem 1.25rem;">Unlink YouTube</button>
+                <button onclick="unlinkAccount()" class="nav-btn" style="background-color: var(--navy-dark); font-size: 0.85rem; padding: 0.5rem 1.25rem;">Unlink YouTube</button>
             </div>
             
             <form id="upload-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
@@ -452,18 +449,6 @@
         </div>
     </div>
 
-    <!-- Unlink Confirmation Modal Pop-up -->
-    <div id="unlinkModal" class="modal-overlay">
-        <div class="modal-card">
-            <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--text-light); font-size: 1.8rem; margin-bottom: 0.75rem;">Are you sure?</h3>
-            <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Only the account holder can relink to YouTube.</p>
-            <div style="display: flex; gap: 1rem;">
-                <button onclick="executeUnlink()" class="btn-primary" style="background-color: var(--brand-red); flex: 1;">Yes</button>
-                <button onclick="closeUnlinkModal()" class="btn-primary" style="background-color: var(--brand-teal); flex: 1;">No</button>
-            </div>
-        </div>
-    </div>
-
     <footer>
         <p>&copy; 2026 ComShell. All rights reserved.</p>
     </footer>
@@ -510,17 +495,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function confirmUnlink() {
-            document.getElementById('unlinkModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeUnlinkModal() {
-            document.getElementById('unlinkModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function executeUnlink() {
+        function unlinkAccount() {
             localStorage.removeItem('yt_user_email');
             location.href = window.location.pathname;
         }
@@ -613,32 +588,46 @@
                 const uploadUrl = data.uploadUrl;
                 statusText.innerText = "Streaming video to YouTube...";
 
-                await new Promise((resolve, reject) => {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open('PUT', uploadUrl, true);
-                    xhr.setRequestHeader('Content-Type', file.type);
-                    xhr.setRequestHeader('X-Upload-Content-Length', file.size);
+                // --- CHUNKED UPLOAD IMPLEMENTATION (5MB Chunks) ---
+                const CHUNK_SIZE = 5 * 1024 * 1024; 
+                let start = 0;
 
-                    xhr.upload.onprogress = (event) => {
-                        if (event.lengthComputable) {
-                            const percentComplete = Math.round((event.loaded / event.total) * 100);
-                            percentageText.innerText = `${percentComplete}%`;
-                            progressBarFill.style.width = `${percentComplete}%`;
-                        }
-                    };
+                while (start < file.size) {
+                    let end = Math.min(start + CHUNK_SIZE, file.size);
+                    let chunk = file.slice(start, end);
 
-                    xhr.onload = () => {
-                        if (xhr.status >= 200 && xhr.status < 300) {
-                            resolve();
-                        } else {
-                            reject(new Error("Direct upload stream to Google failed."));
-                        }
-                    };
+                    await new Promise((resolve, reject) => {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('PUT', uploadUrl, true);
+                        xhr.setRequestHeader('Content-Type', file.type);
+                        xhr.setRequestHeader('Content-Range', `bytes ${start}-${end - 1}/${file.size}`);
 
-                    xhr.onerror = () => reject(new Error("Network error occurred during upload."));
-                    
-                    xhr.send(file);
-                });
+                        xhr.upload.onprogress = (event) => {
+                            if (event.lengthComputable) {
+                                let totalLoaded = start + event.loaded;
+                                const percentComplete = Math.round((totalLoaded / file.size) * 100);
+                                percentageText.innerText = `${percentComplete}%`;
+                                progressBarFill.style.width = `${percentComplete}%`;
+                            }
+                        };
+
+                        xhr.onload = () => {
+                            // YouTube resumable upload returns 308 for intermediate chunks, 200/201 upon full completion
+                            if (xhr.status === 200 || xhr.status === 201 || xhr.status === 308) {
+                                resolve();
+                            } else {
+                                reject(new Error(`Chunk upload failed with status ${xhr.status}`));
+                            }
+                        };
+
+                        xhr.onerror = () => reject(new Error("Network error occurred during chunk upload."));
+                        
+                        xhr.send(chunk);
+                    });
+
+                    start = end;
+                }
+                // --------------------------------------------------
 
                 // --- NOTIFY BACKEND TO SEND SUCCESS EMAIL TO USER ---
                 fetch(`${BACKEND_URL}/api/upload-complete`, {
