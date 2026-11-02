@@ -440,12 +440,21 @@
         </div>
     </div>
 
-    <!-- Error / Unauthorized Modal Pop-up -->
+   <!-- Error / Unauthorized Modal Pop-up -->
     <div id="errorModal" class="modal-overlay">
         <div class="modal-card" style="border-color: var(--brand-red);">
             <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-red); font-size: 1.8rem; margin-bottom: 0.75rem;">Access Denied</h3>
             <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Unauthorized email address. Only ComShell customers can use this pipeline.</p>
-            <button onclick="closeErrorModal()" class="btn-primary" style="background-color: var(--brand-red);">Got It</button>
+            <button onclick="closeErrorModal('errorModal')" class="btn-primary" style="background-color: var(--brand-red);">Got It</button>
+        </div>
+    </div>
+
+    <!-- Upload Failed Modal Pop-up -->
+    <div id="uploadFailedModal" class="modal-overlay">
+        <div class="modal-card" style="border-color: var(--brand-red);">
+            <h3 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--brand-red); font-size: 1.8rem; margin-bottom: 0.75rem;">UPLOAD FAILED</h3>
+            <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Please try again.</p>
+            <button onclick="closeErrorModal('uploadFailedModal')" class="btn-primary" style="background-color: var(--brand-red);">Got It</button>
         </div>
     </div>
 
