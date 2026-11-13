@@ -1,1 +1,16 @@
-
+{
+  "name": "ComShell Safe Upload Pipeline",
+  "short_name": "ComShell SUP",
+  "start_url": "/dashboard.html",
+  "display": "standalone",
+  "background_color": "#edf6f7",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "ComShell-horizontal-trans.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
