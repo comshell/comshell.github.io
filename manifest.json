@@ -7,10 +7,10 @@
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "ComShell-horizontal-trans.png",
+      "src": "/app-icon.png",
       "sizes": "192x192 512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable any"
     }
   ]
 }
