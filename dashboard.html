@@ -292,6 +292,7 @@
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .hidden { display: none; }
+        .pwa-hidden { display: none !important; }
         
         /* Centered, Narrower Stacked Success Bar Container */
         .success-bar {
@@ -486,6 +487,18 @@
                     .then((reg) => console.log('Service Worker registered successfully:', reg.scope))
                     .catch((err) => console.log('Service Worker registration failed:', err));
             });
+        }
+
+        // Hide navigation buttons and lock header logo when running in standalone PWA mode
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+            const navButtons = document.querySelector('header div');
+            if (navButtons) {
+                navButtons.classList.add('pwa-hidden');
+            }
+            const headerLogoLink = document.querySelector('header > a');
+            if (headerLogoLink) {
+                headerLogoLink.addEventListener('click', (e) => e.preventDefault());
+            }
         }
 
         const BACKEND_URL = "https://youtube-backend-oi2l.onrender.com";
